@@ -25,6 +25,7 @@ struct FocusLockApp: App {
                 }
                 .task {
                     await requestAuthorization()
+                    NotificationService.shared.requestPermission()
                 }
         }
         .modelContainer(for: [Schedule.self, DaySchedule.self, SessionLog.self])

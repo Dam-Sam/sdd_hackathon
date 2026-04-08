@@ -14,6 +14,7 @@
 		12CF4C6B913CC2747F85D72D /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735311EB428D1E3C1A61F8DF /* SharedStore.swift */; };
 		13204D18EBC9C65B9B344D86 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8BAC7C01D1D422A8AAF07D /* ManagedSettingsUI.framework */; };
 		1E14CB6A62D16FDABE77D21D /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E6BD2B49D984901E903C45 /* MotionService.swift */; };
+		1EFC92D87C725C6B78B08088 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429884FBA99F84465841192E /* NotificationService.swift */; };
 		1FD361914401B32623ED9739 /* ExtremeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA578DE195AF29E410AE85B /* ExtremeView.swift */; };
 		234ABE59295237A559790A87 /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713D255066F476E6E291AA9B /* FamilyControls.framework */; };
 		265E4E89A5913F4F6E35F3EA /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D52DD0BC7A69DC850EC22DF9 /* ManagedSettings.framework */; };
@@ -21,6 +22,7 @@
 		362D41B20F3032C18621F915 /* AuthorizationGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875D1E437D4E56ED55D63715 /* AuthorizationGateView.swift */; };
 		3BEBA5C75C4F8CBCF30F3439 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462526A8FB82F34B108E241A /* ConfirmationView.swift */; };
 		4221960BB02540C533EC6245 /* ShieldConfigExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81776B4A4C650E342DE78153 /* ShieldConfigExtension.swift */; };
+		430E5E4FB0EA42C7234E74AE /* BlockingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4057DF89E823739DDDF22155 /* BlockingService.swift */; };
 		4C87FA2449B9B633D2F685FF /* MinimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED47A47DE9BC9623B82F3B /* MinimalView.swift */; };
 		51C90FF7CE7688AC2427AA52 /* FocusLockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F709265FECD4A182E5ED43B /* FocusLockApp.swift */; };
 		52233DC9EA895CC10EDF44D7 /* ModerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966154DD237F2B97AE6E994F /* ModerateView.swift */; };
@@ -91,6 +93,8 @@
 		2F709265FECD4A182E5ED43B /* FocusLockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusLockApp.swift; sourceTree = "<group>"; };
 		394DF117D1AB34000AAC41C3 /* ScheduleSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSetupView.swift; sourceTree = "<group>"; };
 		3B8BAC7C01D1D422A8AAF07D /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
+		4057DF89E823739DDDF22155 /* BlockingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingService.swift; sourceTree = "<group>"; };
+		429884FBA99F84465841192E /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		462526A8FB82F34B108E241A /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		48BAA64BD7348779A5D240CE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		5937346FC15F8EF189E54AEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -166,7 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				677185661F402E2331A6F778 /* AppRouter.swift */,
+				4057DF89E823739DDDF22155 /* BlockingService.swift */,
 				92E6BD2B49D984901E903C45 /* MotionService.swift */,
+				429884FBA99F84465841192E /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 				0E3CDDF5F5CF94919557A1BF /* AppRouter.swift in Sources */,
 				E5699D94D8ECD15708221C3F /* AppSelectionView.swift in Sources */,
 				362D41B20F3032C18621F915 /* AuthorizationGateView.swift in Sources */,
+				430E5E4FB0EA42C7234E74AE /* BlockingService.swift in Sources */,
 				3BEBA5C75C4F8CBCF30F3439 /* ConfirmationView.swift in Sources */,
 				5692DF910D929A7CF952E22A /* ContentView.swift in Sources */,
 				C63A4E8313D7408E314DCA47 /* CustomScheduleView.swift in Sources */,
@@ -438,6 +445,7 @@
 				4C87FA2449B9B633D2F685FF /* MinimalView.swift in Sources */,
 				52233DC9EA895CC10EDF44D7 /* ModerateView.swift in Sources */,
 				1E14CB6A62D16FDABE77D21D /* MotionService.swift in Sources */,
+				1EFC92D87C725C6B78B08088 /* NotificationService.swift in Sources */,
 				8976A3E7D9044E46DA7D9D10 /* ScheduleSetupView.swift in Sources */,
 				04648263A6654EB516AC9359 /* ScheduleView.swift in Sources */,
 				9F3913E66A96DCF5B69C2857 /* SharedStore.swift in Sources */,

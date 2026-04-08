@@ -1,10 +1,10 @@
 import SwiftUI
 
 /// Universal confirmation popup. Shown after completing any friction activity.
-/// "Stay Focused" dismisses and keeps locked. "Yes" will call BlockingService (wired in Step 7).
+/// "Stay Focused" dismisses and keeps locked. "Yes" calls BlockingService and dismisses.
 struct ConfirmationView: View {
     let source: UnlockSource
-    let onDismiss: () -> Void   // Called by both buttons; BlockingService call added in Step 7
+    let onDismiss: () -> Void
 
     var body: some View {
         VStack(spacing: 32) {
@@ -32,8 +32,7 @@ struct ConfirmationView: View {
                 .frame(maxWidth: .infinity)
 
                 Button("Yes") {
-                    // BlockingService.unlockApp(source: source) wired in Step 7.
-                    print("[ConfirmationView] Unlock confirmed — source: \(source). BlockingService wired in Step 7.")
+                    BlockingService.shared.unlockApp(source: source)
                     onDismiss()
                 }
                 .buttonStyle(.borderedProminent)

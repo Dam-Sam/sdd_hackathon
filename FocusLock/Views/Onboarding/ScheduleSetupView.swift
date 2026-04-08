@@ -1,31 +1,132 @@
 import SwiftUI
+import SwiftData
 
-/// Schedule setup — second step of onboarding.
-/// Implemented in Step 4.
+// MARK: - DayConfig
+
+/// In-memory representation of one day's schedule, used while the user is editing.
+/// Converted to SwiftData `DaySchedule` objects on Finish.
+struct DayConfig: Identifiable {
+    /// 1 = Monday … 7 = Sunday (ISO 8601 convention).
+    let id: Int
+    var isEnabled: Bool
+    var startTime: Date
+    var endTime: Date
+
+    var name: String {
+        ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][id - 1]
+    }
+}
+
+// MARK: - ScheduleSetupView
+
+/// Second step of onboarding. Lets the user configure their blocking schedule.
+/// Also reused from ScheduleView's "Change Time" button (Step 10).
 struct ScheduleSetupView: View {
-    private static let store = UserDefaults(suiteName: "group.focuslock")
+    @Environment(\.modelContext) private var modelContext
 
-    @AppStorage("hasCompletedOnboarding", store: store)
-    private var hasCompletedOnboarding: Bool = false
+    // Default times
+    private static let nineAM = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!
+    private static let fivePM = Calendar.current.date(bySettingHour: 17, minute: 0, second: 0, of: Date())!
+
+    /// Per-day configuration shared with CustomScheduleView.
+    @State private var days: [DayConfig] = (1...7).map { weekday in
+        DayConfig(
+            id: weekday,
+            isEnabled: weekday <= 5,
+            startTime: nineAM,
+            endTime: fivePM
+        )
+    }
+
+    /// Default-view time pickers — kept in sync with all enabled days.
+    @State private var defaultStart: Date = nineAM
+    @State private var defaultEnd: Date = fivePM
+
+    // MARK: Body
 
     var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "calendar.badge.clock")
-                .font(.system(size: 60))
-                .foregroundStyle(.blue)
-            Text("Set Your Schedule")
-                .font(.title2.bold())
-            Text("(Built in Step 4)")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        NavigationStack {
+            Form {
+                Section("Default Schedule") {
+                    Toggle("Every weekday (Mon–Fri)", isOn: weekdaysBinding)
+                    DatePicker("Start time", selection: $defaultStart, displayedComponents: .hourAndMinute)
+                        .onChange(of: defaultStart) { _, new in
+                            syncTimes(start: new, end: defaultEnd)
+                        }
+                    DatePicker("End time", selection: $defaultEnd, displayedComponents: .hourAndMinute)
+                        .onChange(of: defaultEnd) { _, new in
+                            syncTimes(start: defaultStart, end: new)
+                        }
+                    Toggle("Include weekends", isOn: weekendsBinding)
+                }
 
-            // DEV SHORTCUT — removed when Step 4 is complete
-            Button("Skip to Tab Bar (Dev)") {
-                SharedStore.shared.hasCompletedOnboarding = true
+                Section {
+                    NavigationLink("Custom schedule") {
+                        CustomScheduleView(days: $days)
+                    }
+                }
+
+                Section {
+                    Button("Finish") {
+                        saveAndFinish()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .fontWeight(.semibold)
+                }
             }
-            .buttonStyle(.borderedProminent)
-            .padding(.top, 8)
+            .navigationTitle("Set Your Schedule")
         }
-        .padding()
+    }
+
+    // MARK: Bindings
+
+    private var weekdaysBinding: Binding<Bool> {
+        Binding(
+            get: { days.prefix(5).allSatisfy(\.isEnabled) },
+            set: { enabled in for i in 0..<5 { days[i].isEnabled = enabled } }
+        )
+    }
+
+    private var weekendsBinding: Binding<Bool> {
+        Binding(
+            get: { days[5].isEnabled || days[6].isEnabled },
+            set: { enabled in
+                days[5].isEnabled = enabled
+                days[6].isEnabled = enabled
+            }
+        )
+    }
+
+    // MARK: Helpers
+
+    /// Applies new start/end times to all currently-enabled days.
+    private func syncTimes(start: Date, end: Date) {
+        for i in days.indices where days[i].isEnabled {
+            days[i].startTime = start
+            days[i].endTime = end
+        }
+    }
+
+    /// Saves the schedule to SwiftData and marks onboarding complete.
+    private func saveAndFinish() {
+        // Remove any existing schedules (e.g. if user revisits from settings).
+        let descriptor = FetchDescriptor<Schedule>()
+        if let existing = try? modelContext.fetch(descriptor) {
+            for schedule in existing { modelContext.delete(schedule) }
+        }
+
+        // Build and insert new Schedule with per-day entries.
+        let daySchedules = days.map { config in
+            DaySchedule(
+                weekday: config.id,
+                isEnabled: config.isEnabled,
+                startTime: config.startTime,
+                endTime: config.endTime
+            )
+        }
+        let schedule = Schedule(days: daySchedules)
+        modelContext.insert(schedule)
+
+        SharedStore.shared.hasCompletedOnboarding = true
     }
 }

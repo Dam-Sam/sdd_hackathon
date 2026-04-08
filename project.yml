@@ -1,0 +1,118 @@
+name: FocusLock
+
+options:
+  bundleIdPrefix: com.focuslock
+  deploymentTarget:
+    iOS: "26.0"
+  xcodeVersion: "26.2"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: 6.0
+    SWIFT_STRICT_CONCURRENCY: minimal
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_PREVIEWS: "YES"
+
+targets:
+
+  FocusLock:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: FocusLock
+      - path: Shared
+    entitlements:
+      path: FocusLock/FocusLock.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.focuslock
+        com.apple.developer.family-controls: true
+    info:
+      path: FocusLock/Info.plist
+      properties:
+        CFBundleDisplayName: FocusLock
+        CFBundleURLTypes:
+          - CFBundleURLName: com.focuslock
+            CFBundleURLSchemes:
+              - focuslock
+        NSUserNotificationUsageDescription: "FocusLock uses notifications to warn you when your unlock window is about to close."
+        UILaunchScreen:
+          UIImageName: ""
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock
+        INFOPLIST_FILE: FocusLock/Info.plist
+        CODE_SIGN_ENTITLEMENTS: FocusLock/FocusLock.entitlements
+    dependencies:
+      - sdk: FamilyControls.framework
+      - sdk: ManagedSettings.framework
+      - sdk: DeviceActivity.framework
+      - sdk: CoreMotion.framework
+      - sdk: UserNotifications.framework
+      - target: DeviceActivityMonitor
+        embed: true
+      - target: ShieldConfiguration
+        embed: true
+
+  DeviceActivityMonitor:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: DeviceActivityMonitor
+      - path: Shared
+    entitlements:
+      path: DeviceActivityMonitor/DeviceActivityMonitor.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.focuslock
+        com.apple.developer.family-controls: true
+    info:
+      path: DeviceActivityMonitor/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.deviceactivity.monitor
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).MonitorExtension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock.DeviceActivityMonitor
+        INFOPLIST_FILE: DeviceActivityMonitor/Info.plist
+        CODE_SIGN_ENTITLEMENTS: DeviceActivityMonitor/DeviceActivityMonitor.entitlements
+    dependencies:
+      - sdk: DeviceActivity.framework
+      - sdk: ManagedSettings.framework
+      - sdk: FamilyControls.framework
+
+  ShieldConfiguration:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: ShieldConfiguration
+      - path: Shared
+    entitlements:
+      path: ShieldConfiguration/ShieldConfiguration.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.focuslock
+        com.apple.developer.family-controls: true
+    info:
+      path: ShieldConfiguration/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.screentime.shield.configuration
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldConfigExtension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock.ShieldConfiguration
+        INFOPLIST_FILE: ShieldConfiguration/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ShieldConfiguration/ShieldConfiguration.entitlements
+    dependencies:
+      - sdk: ManagedSettings.framework
+      - sdk: ManagedSettingsUI.framework
+      - sdk: FamilyControls.framework

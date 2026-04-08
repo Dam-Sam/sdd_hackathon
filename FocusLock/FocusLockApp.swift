@@ -11,7 +11,7 @@ struct FocusLockApp: App {
     // Set useAuthStub = false when you have the real entitlement and want to test on device.
     #if DEBUG
     private let useAuthStub = true
-    private let stubStatus = "denied"   // "denied" | "authorized" | "notDetermined"
+    private let stubStatus = "authorized"   // "denied" | "authorized" | "notDetermined"
     #endif
 
     var body: some Scene {
@@ -33,6 +33,10 @@ struct FocusLockApp: App {
         #if DEBUG
         if useAuthStub {
             SharedStore.shared.authorizationStatus = stubStatus
+            // Reset onboarding so you can walk the full flow from any stub state.
+            // Remove these lines if you want to test post-onboarding screens.
+            SharedStore.shared.hasCompletedOnboarding = false
+            SharedStore.shared.onboardingStep = 0
             return
         }
         #endif

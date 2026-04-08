@@ -10,6 +10,11 @@ struct ContentView: View {
     @AppStorage("hasCompletedOnboarding", store: store)
     private var hasCompletedOnboarding: Bool = false
 
+    /// 0 = AppSelectionView, 1 = ScheduleSetupView.
+    /// Writing this from any child view re-renders ContentView and swaps the screen.
+    @AppStorage("onboardingStep", store: store)
+    private var onboardingStep: Int = 0
+
     var body: some View {
         Group {
             switch authStatus {
@@ -17,8 +22,11 @@ struct ContentView: View {
                 AuthorizationGateView()
             case "authorized":
                 if !hasCompletedOnboarding {
-                    // Step 3–4: Onboarding wizard (placeholder)
-                    OnboardingPlaceholder()
+                    if onboardingStep == 0 {
+                        AppSelectionView()
+                    } else {
+                        ScheduleSetupView()
+                    }
                 } else {
                     MainTabView()
                 }
@@ -49,29 +57,5 @@ struct MainTabView: View {
                     Label("Stats", systemImage: "chart.bar.fill")
                 }
         }
-    }
-}
-
-// MARK: - Onboarding Placeholder (replaced in Steps 3–4)
-
-private struct OnboardingPlaceholder: View {
-    var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "list.bullet.clipboard")
-                .font(.system(size: 60))
-                .foregroundStyle(.blue)
-            Text("Onboarding")
-                .font(.title2.bold())
-            Text("(App selection + schedule setup — built in Steps 3–4)")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            // DEV SHORTCUT — removed when real onboarding is built in Steps 3–4
-            Button("Skip to Tab Bar (Dev)") {
-                SharedStore.shared.hasCompletedOnboarding = true
-            }
-            .buttonStyle(.borderedProminent)
-            .padding(.top, 8)
-        }
-        .padding()
     }
 }

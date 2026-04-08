@@ -14,9 +14,12 @@ struct FocusLockApp: App {
     private let stubStatus = "authorized"   // "denied" | "authorized" | "notDetermined"
     #endif
 
+    @State private var router = AppRouter()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(router)
                 .onOpenURL { url in
                     handleURL(url)
                 }
@@ -37,6 +40,7 @@ struct FocusLockApp: App {
             // Remove these lines if you want to test post-onboarding screens.
             SharedStore.shared.hasCompletedOnboarding = false
             SharedStore.shared.onboardingStep = 0
+            SharedStore.shared.allAppsUnlockExpiry = Date().addingTimeInterval(300)
             return
         }
         #endif
@@ -52,14 +56,23 @@ struct FocusLockApp: App {
     // MARK: - URL Scheme
 
     private func handleURL(_ url: URL) {
-        // URL scheme handler — wired up fully in Step 9 (ShieldConfiguration + FrictionRouter).
         guard url.scheme == "focuslock",
               url.host == "unlock",
               let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let source = components.queryItems?.first(where: { $0.name == "source" })?.value
         else { return }
 
-        print("[FocusLockApp] Received unlock URL — source: \(source)")
-        // Step 9 will route to FrictionRouter based on source/app params.
+        let app = components.queryItems?.first(where: { $0.name == "app" })?.value
+
+        switch source {
+        case "home":
+            router.pendingUnlockSource = .homeScreen
+        case "shield":
+            if let bundleID = app {
+                router.pendingUnlockSource = .shield(bundleID: bundleID)
+            }
+        default:
+            print("[FocusLockApp] Unknown unlock source: \(source)")
+        }
     }
 }

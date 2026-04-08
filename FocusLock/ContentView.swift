@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// Root view. Routes between the authorization gate, onboarding wizard, and main tab bar.
+/// Also presents FrictionRouter as a fullScreenCover when AppRouter.pendingUnlockSource is set.
 struct ContentView: View {
     private static let store = UserDefaults(suiteName: "group.focuslock")
 
@@ -15,7 +16,10 @@ struct ContentView: View {
     @AppStorage("onboardingStep", store: store)
     private var onboardingStep: Int = 0
 
+    @Environment(AppRouter.self) private var router
+
     var body: some View {
+        @Bindable var router = router
         Group {
             switch authStatus {
             case "denied":
@@ -35,6 +39,9 @@ struct ContentView: View {
                 Color(.systemBackground)
                     .ignoresSafeArea()
             }
+        }
+        .fullScreenCover(item: $router.pendingUnlockSource) { source in
+            FrictionRouter(source: source)
         }
     }
 }

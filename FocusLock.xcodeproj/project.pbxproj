@@ -10,14 +10,20 @@
 		0046A9FF745533354F821D3C /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735311EB428D1E3C1A61F8DF /* SharedStore.swift */; };
 		04648263A6654EB516AC9359 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F849E053C25909E58C3A4D /* ScheduleView.swift */; };
 		0951817B213665C7E40E9544 /* FocusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C1A30462A7A6275FC95258 /* FocusData.swift */; };
+		0E3CDDF5F5CF94919557A1BF /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677185661F402E2331A6F778 /* AppRouter.swift */; };
 		12CF4C6B913CC2747F85D72D /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735311EB428D1E3C1A61F8DF /* SharedStore.swift */; };
 		13204D18EBC9C65B9B344D86 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8BAC7C01D1D422A8AAF07D /* ManagedSettingsUI.framework */; };
+		1E14CB6A62D16FDABE77D21D /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E6BD2B49D984901E903C45 /* MotionService.swift */; };
+		1FD361914401B32623ED9739 /* ExtremeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA578DE195AF29E410AE85B /* ExtremeView.swift */; };
 		234ABE59295237A559790A87 /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713D255066F476E6E291AA9B /* FamilyControls.framework */; };
 		265E4E89A5913F4F6E35F3EA /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D52DD0BC7A69DC850EC22DF9 /* ManagedSettings.framework */; };
 		2A1755030BDAD2B0E8953468 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996AA9C824EA7F3971B9F4C4 /* HomeView.swift */; };
 		362D41B20F3032C18621F915 /* AuthorizationGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875D1E437D4E56ED55D63715 /* AuthorizationGateView.swift */; };
+		3BEBA5C75C4F8CBCF30F3439 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462526A8FB82F34B108E241A /* ConfirmationView.swift */; };
 		4221960BB02540C533EC6245 /* ShieldConfigExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81776B4A4C650E342DE78153 /* ShieldConfigExtension.swift */; };
+		4C87FA2449B9B633D2F685FF /* MinimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED47A47DE9BC9623B82F3B /* MinimalView.swift */; };
 		51C90FF7CE7688AC2427AA52 /* FocusLockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F709265FECD4A182E5ED43B /* FocusLockApp.swift */; };
+		52233DC9EA895CC10EDF44D7 /* ModerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966154DD237F2B97AE6E994F /* ModerateView.swift */; };
 		5692DF910D929A7CF952E22A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE44449F95E89CBE402ED /* ContentView.swift */; };
 		5E16FE29EB248F44892F2C75 /* ShieldConfiguration.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08F7065F8B3170F5A6FBC38A /* ShieldConfiguration.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6C052ABDB3A7D3F2BDC2C6CA /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCA90CA1551FDE8A455DD73 /* StatsView.swift */; };
@@ -33,6 +39,7 @@
 		C226CB4A94C78FDFE6A4DC9B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BAA64BD7348779A5D240CE /* CoreMotion.framework */; };
 		C63A4E8313D7408E314DCA47 /* CustomScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EB979469A8BE23111AA79E /* CustomScheduleView.swift */; };
 		C7A34D11DDAD991F4901A883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA677BB4858D65F1B095B3C5 /* Assets.xcassets */; };
+		D5B5B23559297ACA807DD90E /* FrictionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D620F659D2957D29D418E096 /* FrictionRouter.swift */; };
 		D8CD690812B9BE7B24479423 /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713D255066F476E6E291AA9B /* FamilyControls.framework */; };
 		DCF253AB9747F8608AFF33F6 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D52DD0BC7A69DC850EC22DF9 /* ManagedSettings.framework */; };
 		E5699D94D8ECD15708221C3F /* AppSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E75FCD411DCE8994579063F /* AppSelectionView.swift */; };
@@ -84,9 +91,12 @@
 		2F709265FECD4A182E5ED43B /* FocusLockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusLockApp.swift; sourceTree = "<group>"; };
 		394DF117D1AB34000AAC41C3 /* ScheduleSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSetupView.swift; sourceTree = "<group>"; };
 		3B8BAC7C01D1D422A8AAF07D /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
+		462526A8FB82F34B108E241A /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		48BAA64BD7348779A5D240CE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		5937346FC15F8EF189E54AEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		623E07A155E17BFD46CA938F /* DeviceActivityMonitor.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = DeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		677185661F402E2331A6F778 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		6CA578DE195AF29E410AE85B /* ExtremeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtremeView.swift; sourceTree = "<group>"; };
 		713D255066F476E6E291AA9B /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
 		735311EB428D1E3C1A61F8DF /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
 		7D8733F08A39382B6AE9EE5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -95,9 +105,13 @@
 		875D1E437D4E56ED55D63715 /* AuthorizationGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationGateView.swift; sourceTree = "<group>"; };
 		8B26C50B5C83D75C974551E4 /* ShieldConfiguration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShieldConfiguration.entitlements; sourceTree = "<group>"; };
 		92225BD262C1762AD004F175 /* FocusLock.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FocusLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92E6BD2B49D984901E903C45 /* MotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionService.swift; sourceTree = "<group>"; };
+		966154DD237F2B97AE6E994F /* ModerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModerateView.swift; sourceTree = "<group>"; };
 		996AA9C824EA7F3971B9F4C4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B9EB979469A8BE23111AA79E /* CustomScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScheduleView.swift; sourceTree = "<group>"; };
+		CBED47A47DE9BC9623B82F3B /* MinimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalView.swift; sourceTree = "<group>"; };
 		D52DD0BC7A69DC850EC22DF9 /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
+		D620F659D2957D29D418E096 /* FrictionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrictionRouter.swift; sourceTree = "<group>"; };
 		E0C1A30462A7A6275FC95258 /* FocusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusData.swift; sourceTree = "<group>"; };
 		EA677BB4858D65F1B095B3C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +162,15 @@
 			path = DeviceActivityMonitor;
 			sourceTree = "<group>";
 		};
+		24B57418F60634F93FD103F0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				677185661F402E2331A6F778 /* AppRouter.swift */,
+				92E6BD2B49D984901E903C45 /* MotionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		2B0D48DD8841B8FEA6B840AF = {
 			isa = PBXGroup;
 			children = (
@@ -185,9 +208,22 @@
 				2F709265FECD4A182E5ED43B /* FocusLockApp.swift */,
 				7D8733F08A39382B6AE9EE5D /* Info.plist */,
 				39AF113214F7C5AA30D41F0E /* Models */,
+				24B57418F60634F93FD103F0 /* Services */,
 				7406D1AB49DEA9A2F8AF3F12 /* Views */,
 			);
 			path = FocusLock;
+			sourceTree = "<group>";
+		};
+		67F87DFCF66D7AD549C351FB /* Friction */ = {
+			isa = PBXGroup;
+			children = (
+				462526A8FB82F34B108E241A /* ConfirmationView.swift */,
+				6CA578DE195AF29E410AE85B /* ExtremeView.swift */,
+				D620F659D2957D29D418E096 /* FrictionRouter.swift */,
+				CBED47A47DE9BC9623B82F3B /* MinimalView.swift */,
+				966154DD237F2B97AE6E994F /* ModerateView.swift */,
+			);
+			path = Friction;
 			sourceTree = "<group>";
 		};
 		6DB642E201DC1E38A616EB03 /* Schedule */ = {
@@ -201,6 +237,7 @@
 		7406D1AB49DEA9A2F8AF3F12 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				67F87DFCF66D7AD549C351FB /* Friction */,
 				3CCF508FB67602D4B4DC0473 /* Home */,
 				7FB7EE4800ADEDD2AC0724D3 /* Onboarding */,
 				6DB642E201DC1E38A616EB03 /* Schedule */,
@@ -387,13 +424,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E3CDDF5F5CF94919557A1BF /* AppRouter.swift in Sources */,
 				E5699D94D8ECD15708221C3F /* AppSelectionView.swift in Sources */,
 				362D41B20F3032C18621F915 /* AuthorizationGateView.swift in Sources */,
+				3BEBA5C75C4F8CBCF30F3439 /* ConfirmationView.swift in Sources */,
 				5692DF910D929A7CF952E22A /* ContentView.swift in Sources */,
 				C63A4E8313D7408E314DCA47 /* CustomScheduleView.swift in Sources */,
+				1FD361914401B32623ED9739 /* ExtremeView.swift in Sources */,
 				0951817B213665C7E40E9544 /* FocusData.swift in Sources */,
 				51C90FF7CE7688AC2427AA52 /* FocusLockApp.swift in Sources */,
+				D5B5B23559297ACA807DD90E /* FrictionRouter.swift in Sources */,
 				2A1755030BDAD2B0E8953468 /* HomeView.swift in Sources */,
+				4C87FA2449B9B633D2F685FF /* MinimalView.swift in Sources */,
+				52233DC9EA895CC10EDF44D7 /* ModerateView.swift in Sources */,
+				1E14CB6A62D16FDABE77D21D /* MotionService.swift in Sources */,
 				8976A3E7D9044E46DA7D9D10 /* ScheduleSetupView.swift in Sources */,
 				04648263A6654EB516AC9359 /* ScheduleView.swift in Sources */,
 				9F3913E66A96DCF5B69C2857 /* SharedStore.swift in Sources */,

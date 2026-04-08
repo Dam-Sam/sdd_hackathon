@@ -3,6 +3,7 @@ import SwiftData
 
 struct HomeView: View {
     private static let store = UserDefaults(suiteName: "group.focuslock")
+    @Environment(AppRouter.self) private var router
 
     @AppStorage("isSessionActive", store: store)
     private var isSessionActive: Bool = false
@@ -43,7 +44,7 @@ struct HomeView: View {
 
                 // MARK: Unlock button
                 Button("Unlock") {
-                    // Stub — FrictionRouter wired in step 6
+                    router.pendingUnlockSource = .homeScreen
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(!isSessionActive)

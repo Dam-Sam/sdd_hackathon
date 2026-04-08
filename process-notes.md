@@ -61,6 +61,65 @@
 
 **Active shaping:** Sam drove the Path B decision independently and pushed back implicitly on Path A (Shortcuts) by identifying the loophole in the entitlement requirement (dev builds on personal device). The time-saved reframe was accepted without friction. The unlock interaction edge case (all-apps expiry + individual unlock) was a prompted question and Sam answered immediately and correctly.
 
+## /build
+
+### Step 1: Xcode project scaffold — three targets, SharedStore, SwiftData models, tab bar
+
+**What was built:**
+- Three-target Xcode project generated via xcodegen (xcodegen 2.45.3, Xcode 26.2, iOS 26 SDK)
+- Three targets: FocusLock (main app), DeviceActivityMonitor extension, ShieldConfiguration extension
+- App Group `group.focuslock` configured in all three targets via entitlements
+- Family Controls entitlement added to all three targets
+- `SharedStore.swift` (Shared/) wraps `UserDefaults(suiteName: "group.focuslock")` — all nine keys from spec defined
+- SwiftData models: `Schedule`, `DaySchedule`, `SessionLog` in `FocusLock/Models/FocusData.swift`
+- `ContentView.swift` with routing logic (auth gate placeholder → onboarding placeholder → MainTabView)
+- `MainTabView` with three tabs: Home, Schedule, Stats (each a placeholder view)
+- `focuslock://` URL scheme registered in Info.plist; stub handler in `FocusLockApp.swift`
+- Stub implementations of `MonitorExtension` and `ShieldConfigExtension` compile cleanly
+- Build SUCCEEDED with no errors on iPhone 17 Pro simulator
+
+**Issues encountered:**
+- xcodegen cleared entitlement files when `properties` wasn't specified inline — fixed by moving entitlement values into project.yml
+- Swift 6 concurrency: `SharedStore.shared` static property flagged as non-`Sendable` — fixed with `nonisolated(unsafe)` and `@unchecked Sendable`
+- `ShieldConfiguration.Label` initializer changed in newer SDK to require `text:` label — fixed
+
+**Learner verification observation:** Saw onboarding placeholder on first launch (correct — routing logic was live). Tapped "Skip to Tab Bar (Dev)" button, confirmed three-tab MainTabView appeared (Home, Schedule, Stats).
+
+**Comprehension check answer:** "All three targets need it" — correct. Understood that SharedStore.swift must be compiled into each target's binary separately because extensions can't import from the main app module.
+
+### Step 2: Authorization gate — FamilyControls auth request and denial handling
+
+**What was built:**
+- `AuthorizationGateView.swift` — full-screen gate with orange lock shield icon, "Screen Time Access Required" title, and "Grant Access" button that calls `AuthorizationCenter.shared.requestAuthorization(for: .individual)` and writes result to SharedStore
+- `FocusLockApp.swift` updated — `.task` modifier calls `requestAuthorization()` on launch; `#if DEBUG` stub with `useAuthStub` / `stubStatus` flags bypasses real API for visual testing; stub also resets `hasCompletedOnboarding = false` for clean flow testing
+- `ContentView.swift` updated — replaced `AuthorizationGatePlaceholder` with real `AuthorizationGateView`; routing switched from `if/else` to `switch` on authStatus with explicit handling of "notDetermined" (blank screen during auth check), "denied" (gate), "authorized" (onboarding or tabs)
+
+**Issues encountered:**
+- `FamilyControlsMember.individualWebDomains` does not exist in this SDK — fixed to `.individual`
+- On first verification run, app jumped straight to tab bar because `hasCompletedOnboarding = true` was persisted from Step 1's "Skip to Tab Bar (Dev)" button — fixed by adding `hasCompletedOnboarding = false` reset to the debug stub
+
+**Learner verification observation:** Confirmed gate appeared with `stubStatus = "denied"`. After fix, confirmed onboarding placeholder appeared with `stubStatus = "authorized"`.
+
+**Comprehension check answer:** "@AppStorage re-renders automatically" — correct. Understood that the routing lives in ContentView because `@AppStorage` subscribes to UserDefaults changes and triggers re-renders automatically, eliminating manual state plumbing.
+
+### Step 3: Onboarding — app selection (FamilyActivityPicker + friction tier selector)
+
+**What was built:**
+- `AppSelectionView.swift` — "Choose Apps" button triggers `.familyActivityPicker()` sheet; segmented control for friction tier (Minimal pre-selected); Continue button disabled until selection is non-empty; `#if DEBUG` bypass button for simulator testing (no Family Controls in sim); `saveAndContinue()` encodes `FamilyActivitySelection` via `PropertyListEncoder`, writes `blockedApps`, `frictionTier`, and `onboardingStep = 1` to SharedStore
+- `ScheduleSetupView.swift` — placeholder for Step 4, with dev skip button
+- `ContentView.swift` updated — added `@AppStorage("onboardingStep")` routing; `OnboardingPlaceholder` removed; now routes to `AppSelectionView` (step 0) or `ScheduleSetupView` (step 1)
+- `FocusLockApp.swift` debug reset updated to also reset `onboardingStep = 0`
+- `xcodegen generate` required after file creation — noted for future steps
+
+**Issues encountered:**
+- New Swift files created on disk weren't included in the Xcode project until `xcodegen generate` was re-run. Will need to do this after every new file creation.
+
+**Learner verification observation:** Saw AppSelectionView on launch (past auth gate). Tapped Continue (via debug bypass), navigated to ScheduleSetupView placeholder. Flow confirmed correct.
+
+**Comprehension check answer:** "NavigationStack push" — incorrect. Correct answer: `@AppStorage` write in `ContentView` triggers re-render which swaps the view. Brief explanation given pointing to `ContentView.swift` line 25.
+
+---
+
 ## /checklist
 
 **Sequencing decisions:** Scaffold-first approach: three-target Xcode project + SharedStore + SwiftData models before any feature work. Authorization gate second — gates all subsequent UI. Onboarding before home screen (home screen reads SharedStore values written during onboarding). Friction activities before BlockingService (router needs to exist before unlock calls through). Extensions (DeviceActivityMonitor, ShieldConfiguration) after the blocking layer is wired — they depend on SharedStore and BlockingService being functional. Schedule/Stats tabs last — pure read views that can be built once data is flowing.

@@ -12,19 +12,19 @@
 
 ## Checklist
 
-- [ ] **1. Xcode project scaffold — three targets, SharedStore, SwiftData models, tab bar**
+- [x] **1. Xcode project scaffold — three targets, SharedStore, SwiftData models, tab bar**
   Spec ref: `spec.md > Architecture Overview`, `spec.md > Targets`, `spec.md > Shared State`, `spec.md > SwiftData Models`, `spec.md > Navigation & URL Scheme`
   What to build: Create a new Xcode project named FocusLock with three targets: main app (FocusLock), DeviceActivityMonitor extension, and ShieldConfiguration extension. Configure an App Group (`group.focuslock`) in all three targets and add the necessary entitlements. Implement `SharedStore.swift` wrapping `UserDefaults(suiteName: "group.focuslock")` with all keys defined in the spec (blockedApps, frictionTier, isSessionActive, sessionEndTime, allAppsUnlockExpiry, individualUnlockExpiries, hasCompletedOnboarding, onboardingStep, authorizationStatus). Add SwiftData models to the main app target (`Schedule`, `DaySchedule`, `SessionLog`). Set up `ContentView.swift` with a tab bar (Home, Schedule, Stats) using placeholder views for each tab. Register the `focuslock://` URL scheme in the main app's Info.plist.
   Acceptance: App builds and launches without errors. A tab bar with three tabs is visible. SharedStore and SwiftData models compile cleanly in the main app target.
   Verify: Run on simulator. Confirm the app launches to a tab bar with three tabs. Confirm there are no build errors or warnings related to the extension targets or App Group configuration.
 
-- [ ] **2. Authorization gate — FamilyControls auth request and denial handling**
+- [x] **2. Authorization gate — FamilyControls auth request and denial handling**
   Spec ref: `spec.md > Views > Onboarding > Authorization Gate`
   What to build: In `FocusLockApp.swift`, on launch call `AuthorizationCenter.shared.requestAuthorization(for: .individualWebDomains)` and write the result to `SharedStore.authorizationStatus`. Implement `AuthorizationGateView.swift` — a full-screen view shown when auth is denied, with the message "FocusLock needs Screen Time access to block apps" and a "Grant Access" button that re-triggers authorization. In `ContentView.swift`, add routing logic: if `authorizationStatus == "denied"` → show `AuthorizationGateView`; if `hasCompletedOnboarding == false` → show onboarding (placeholder for now); else → show tab bar. Since the Family Controls entitlement isn't yet approved, add a mock/stub so the gate can be tested visually without the real API.
   Acceptance: From PRD: "Gate shown both on first launch and on subsequent launches if auth was revoked in Settings. No user can reach onboarding or home screen without authorization."
   Verify: Run app. With the stub simulating a denied state, confirm `AuthorizationGateView` appears and blocks access to the tab bar. With the stub simulating an authorized state, confirm the app proceeds past the gate. Confirm the "Grant Access" button is tappable and calls the authorization function.
 
-- [ ] **3. Onboarding — app selection (FamilyActivityPicker + friction tier selector)**
+- [x] **3. Onboarding — app selection (FamilyActivityPicker + friction tier selector)**
   Spec ref: `spec.md > Views > Onboarding > AppSelectionView`
   What to build: Implement `AppSelectionView.swift`. Present `FamilyActivityPicker` as a sheet triggered on appear or by a button. Below the picker, add a friction tier selector — segmented control with three options: Minimal (pre-selected), Moderate, Extreme. Continue button is disabled while `selection.applications.isEmpty`. On Continue: encode the `FamilyActivitySelection` and write to `SharedStore.blockedApps`; write the selected tier string to `SharedStore.frictionTier`; update `SharedStore.onboardingStep = 1`; navigate to `ScheduleSetupView`. Wire `ContentView.swift` to show `AppSelectionView` when `hasCompletedOnboarding == false` and `onboardingStep == 0`.
   Acceptance: From PRD: "A friction level selector appears below the app list: Minimal (pre-selected by default), Moderate, Extreme — the selected level is visually highlighted. The Continue button is grayed out until at least one app is selected. Once one or more apps are selected, the Continue button lights up and becomes tappable."

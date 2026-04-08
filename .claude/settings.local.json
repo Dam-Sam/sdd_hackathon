@@ -3,7 +3,10 @@
     "allow": [
       "WebSearch",
       "Bash(xcodegen --version)",
-      "Bash(xcodebuild -version)"
+      "Bash(xcodebuild -version)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git commit:*)"
     ]
   }
 }

@@ -28,10 +28,13 @@ struct HomeView: View {
                     .contentTransition(.numericText())
 
                 // MARK: Lock icon
-                Image(systemName: isSessionActive ? "lock.fill" : "lock.open.fill")
+                // Three states: no session (open, secondary), unlock window active (open, green),
+                // session locked (closed, red).
+                Image(systemName: isAppsUnlocked ? "lock.open.fill" : (isSessionActive ? "lock.fill" : "lock.open.fill"))
                     .font(.system(size: 72))
-                    .foregroundStyle(isSessionActive ? .red : .secondary)
+                    .foregroundStyle(isAppsUnlocked ? .green : (isSessionActive ? .red : .secondary))
                     .symbolEffect(.bounce, value: isSessionActive)
+                    .symbolEffect(.bounce, value: isAppsUnlocked)
 
                 // MARK: Time saved today
                 VStack(spacing: 4) {
@@ -43,11 +46,12 @@ struct HomeView: View {
                 }
 
                 // MARK: Unlock button
+                // Disabled when no session is running, or when an unlock window is already active.
                 Button("Unlock") {
                     router.pendingUnlockSource = .homeScreen
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(!isSessionActive)
+                .disabled(!isSessionActive || isAppsUnlocked)
 
                 // MARK: Secondary countdown (visible only when allAppsUnlockExpiry is set)
                 if let expiry = allAppsUnlockExpiry, expiry > now {
@@ -73,6 +77,12 @@ struct HomeView: View {
     }
 
     // MARK: - Helpers
+
+    /// True when an all-apps unlock window is currently active.
+    private var isAppsUnlocked: Bool {
+        guard let expiry = allAppsUnlockExpiry else { return false }
+        return expiry > now
+    }
 
     private var countdownText: String {
         guard isSessionActive, let end = sessionEndTime, end > now else { return "0:00" }

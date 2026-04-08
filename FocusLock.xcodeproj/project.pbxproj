@@ -15,6 +15,7 @@
 		234ABE59295237A559790A87 /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713D255066F476E6E291AA9B /* FamilyControls.framework */; };
 		265E4E89A5913F4F6E35F3EA /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D52DD0BC7A69DC850EC22DF9 /* ManagedSettings.framework */; };
 		2A1755030BDAD2B0E8953468 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996AA9C824EA7F3971B9F4C4 /* HomeView.swift */; };
+		362D41B20F3032C18621F915 /* AuthorizationGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875D1E437D4E56ED55D63715 /* AuthorizationGateView.swift */; };
 		4221960BB02540C533EC6245 /* ShieldConfigExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81776B4A4C650E342DE78153 /* ShieldConfigExtension.swift */; };
 		51C90FF7CE7688AC2427AA52 /* FocusLockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F709265FECD4A182E5ED43B /* FocusLockApp.swift */; };
 		5692DF910D929A7CF952E22A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE44449F95E89CBE402ED /* ContentView.swift */; };
@@ -86,6 +87,7 @@
 		7D8733F08A39382B6AE9EE5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7F8FE44449F95E89CBE402ED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		81776B4A4C650E342DE78153 /* ShieldConfigExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigExtension.swift; sourceTree = "<group>"; };
+		875D1E437D4E56ED55D63715 /* AuthorizationGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationGateView.swift; sourceTree = "<group>"; };
 		8B26C50B5C83D75C974551E4 /* ShieldConfiguration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShieldConfiguration.entitlements; sourceTree = "<group>"; };
 		92225BD262C1762AD004F175 /* FocusLock.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FocusLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		996AA9C824EA7F3971B9F4C4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -194,10 +196,19 @@
 			isa = PBXGroup;
 			children = (
 				3CCF508FB67602D4B4DC0473 /* Home */,
+				7FB7EE4800ADEDD2AC0724D3 /* Onboarding */,
 				6DB642E201DC1E38A616EB03 /* Schedule */,
 				A4D4AFCA60CE581294DFC711 /* Stats */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		7FB7EE4800ADEDD2AC0724D3 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				875D1E437D4E56ED55D63715 /* AuthorizationGateView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		89FB2EA44C4411DD83B4C981 /* ShieldConfiguration */ = {
@@ -367,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				362D41B20F3032C18621F915 /* AuthorizationGateView.swift in Sources */,
 				5692DF910D929A7CF952E22A /* ContentView.swift in Sources */,
 				0951817B213665C7E40E9544 /* FocusData.swift in Sources */,
 				51C90FF7CE7688AC2427AA52 /* FocusLockApp.swift in Sources */,

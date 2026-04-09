@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import DeviceActivity
 
 // MARK: - DayConfig
 
@@ -107,7 +108,7 @@ struct ScheduleSetupView: View {
         }
     }
 
-    /// Saves the schedule to SwiftData and marks onboarding complete.
+    /// Saves the schedule to SwiftData, registers DeviceActivity monitoring, and marks onboarding complete.
     private func saveAndFinish() {
         // Remove any existing schedules (e.g. if user revisits from settings).
         let descriptor = FetchDescriptor<Schedule>()
@@ -127,6 +128,50 @@ struct ScheduleSetupView: View {
         let schedule = Schedule(days: daySchedules)
         modelContext.insert(schedule)
 
+        // Store scheduled end times so MonitorExtension can reconstruct sessionEndTime.
+        let endTimes = days.filter(\.isEnabled).reduce(into: [Int: Date]()) { dict, day in
+            dict[day.id] = day.endTime
+        }
+        SharedStore.shared.scheduledEndTimes = endTimes
+
+        // Register DeviceActivity monitoring for each enabled day.
+        registerDeviceActivitySchedules()
+
         SharedStore.shared.hasCompletedOnboarding = true
+    }
+
+    /// Registers one DeviceActivitySchedule per enabled day.
+    /// The weekday component restricts each activity to its specific day of the week.
+    private func registerDeviceActivitySchedules() {
+        let center = DeviceActivityCenter()
+
+        // Clear any previously registered focus sessions before re-registering.
+        let allFocusActivities = (1...7).map { DeviceActivityName("focus-session-\($0)") }
+        center.stopMonitoring(allFocusActivities)
+
+        for day in days where day.isEnabled {
+            var startComponents = Calendar.current.dateComponents([.hour, .minute], from: day.startTime)
+            var endComponents = Calendar.current.dateComponents([.hour, .minute], from: day.endTime)
+
+            // Convert our 1=Mon…7=Sun to Gregorian weekday (1=Sun, 2=Mon…7=Sat).
+            let gregorianWeekday = (day.id % 7) + 1
+            startComponents.weekday = gregorianWeekday
+            endComponents.weekday = gregorianWeekday
+
+            let activitySchedule = DeviceActivitySchedule(
+                intervalStart: startComponents,
+                intervalEnd: endComponents,
+                repeats: true
+            )
+
+            do {
+                try center.startMonitoring(
+                    DeviceActivityName("focus-session-\(day.id)"),
+                    during: activitySchedule
+                )
+            } catch {
+                print("[ScheduleSetupView] Failed to register day \(day.id): \(error)")
+            }
+        }
     }
 }

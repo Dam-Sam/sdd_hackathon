@@ -11,8 +11,10 @@
 		04648263A6654EB516AC9359 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F849E053C25909E58C3A4D /* ScheduleView.swift */; };
 		0951817B213665C7E40E9544 /* FocusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C1A30462A7A6275FC95258 /* FocusData.swift */; };
 		0E3CDDF5F5CF94919557A1BF /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677185661F402E2331A6F778 /* AppRouter.swift */; };
+		116701206B435231A0C04FB9 /* PendingSessionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4BF2319E762638AF968459 /* PendingSessionLog.swift */; };
 		12CF4C6B913CC2747F85D72D /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735311EB428D1E3C1A61F8DF /* SharedStore.swift */; };
 		13204D18EBC9C65B9B344D86 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8BAC7C01D1D422A8AAF07D /* ManagedSettingsUI.framework */; };
+		186C5A68374D3180253E8B5D /* PendingSessionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4BF2319E762638AF968459 /* PendingSessionLog.swift */; };
 		1E14CB6A62D16FDABE77D21D /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E6BD2B49D984901E903C45 /* MotionService.swift */; };
 		1EFC92D87C725C6B78B08088 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429884FBA99F84465841192E /* NotificationService.swift */; };
 		1FD361914401B32623ED9739 /* ExtremeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA578DE195AF29E410AE85B /* ExtremeView.swift */; };
@@ -23,6 +25,7 @@
 		3BEBA5C75C4F8CBCF30F3439 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462526A8FB82F34B108E241A /* ConfirmationView.swift */; };
 		4221960BB02540C533EC6245 /* ShieldConfigExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81776B4A4C650E342DE78153 /* ShieldConfigExtension.swift */; };
 		430E5E4FB0EA42C7234E74AE /* BlockingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4057DF89E823739DDDF22155 /* BlockingService.swift */; };
+		45E9DF31AAFC2DDFC9FAAC5C /* PendingSessionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4BF2319E762638AF968459 /* PendingSessionLog.swift */; };
 		4C87FA2449B9B633D2F685FF /* MinimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED47A47DE9BC9623B82F3B /* MinimalView.swift */; };
 		51C90FF7CE7688AC2427AA52 /* FocusLockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F709265FECD4A182E5ED43B /* FocusLockApp.swift */; };
 		52233DC9EA895CC10EDF44D7 /* ModerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966154DD237F2B97AE6E994F /* ModerateView.swift */; };
@@ -104,6 +107,7 @@
 		713D255066F476E6E291AA9B /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
 		735311EB428D1E3C1A61F8DF /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
 		7D8733F08A39382B6AE9EE5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7F4BF2319E762638AF968459 /* PendingSessionLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingSessionLog.swift; sourceTree = "<group>"; };
 		7F8FE44449F95E89CBE402ED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		81776B4A4C650E342DE78153 /* ShieldConfigExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigExtension.swift; sourceTree = "<group>"; };
 		875D1E437D4E56ED55D63715 /* AuthorizationGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationGateView.swift; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 		C97B74A071828E4F53CD8C70 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				7F4BF2319E762638AF968459 /* PendingSessionLog.swift */,
 				735311EB428D1E3C1A61F8DF /* SharedStore.swift */,
 			);
 			path = Shared;
@@ -421,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				116701206B435231A0C04FB9 /* PendingSessionLog.swift in Sources */,
 				0046A9FF745533354F821D3C /* SharedStore.swift in Sources */,
 				4221960BB02540C533EC6245 /* ShieldConfigExtension.swift in Sources */,
 			);
@@ -446,6 +452,7 @@
 				52233DC9EA895CC10EDF44D7 /* ModerateView.swift in Sources */,
 				1E14CB6A62D16FDABE77D21D /* MotionService.swift in Sources */,
 				1EFC92D87C725C6B78B08088 /* NotificationService.swift in Sources */,
+				186C5A68374D3180253E8B5D /* PendingSessionLog.swift in Sources */,
 				8976A3E7D9044E46DA7D9D10 /* ScheduleSetupView.swift in Sources */,
 				04648263A6654EB516AC9359 /* ScheduleView.swift in Sources */,
 				9F3913E66A96DCF5B69C2857 /* SharedStore.swift in Sources */,
@@ -458,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAA9B16978ED3CBDD1638207 /* MonitorExtension.swift in Sources */,
+				45E9DF31AAFC2DDFC9FAAC5C /* PendingSessionLog.swift in Sources */,
 				12CF4C6B913CC2747F85D72D /* SharedStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -4,6 +4,7 @@ import SwiftData
 struct HomeView: View {
     private static let store = UserDefaults(suiteName: "group.focuslock")
     @Environment(AppRouter.self) private var router
+    @Environment(\.modelContext) private var modelContext
 
     @AppStorage("isSessionActive", store: store)
     private var isSessionActive: Bool = false
@@ -68,6 +69,9 @@ struct HomeView: View {
             }
             .padding(32)
             .navigationTitle("FocusLock")
+            .onAppear {
+                consumePendingSessionLog()
+            }
             .onReceive(timer) { tick in
                 now = tick
                 sessionEndTime = SharedStore.shared.sessionEndTime
@@ -100,6 +104,19 @@ struct HomeView: View {
         let minutes = remaining / 60
         let seconds = remaining % 60
         return String(format: "%d:%02d", minutes, seconds)
+    }
+
+    /// Reads any pending session log written by MonitorExtension and persists it to SwiftData.
+    /// The extension can't write SwiftData directly — this is the handoff point.
+    private func consumePendingSessionLog() {
+        guard let log = SharedStore.shared.pendingSessionLog else { return }
+        let entry = SessionLog(
+            date: log.date,
+            sessionDuration: log.sessionDuration,
+            totalUnlockMinutes: log.totalUnlockMinutes
+        )
+        modelContext.insert(entry)
+        SharedStore.shared.pendingSessionLog = nil
     }
 
     private var timeSavedToday: String {

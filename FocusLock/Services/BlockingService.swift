@@ -1,6 +1,7 @@
 import Foundation
 import ManagedSettings
 import FamilyControls
+import DeviceActivity
 
 /// Wraps ManagedSettingsStore. Called by the main app after friction is completed.
 /// Extensions (DeviceActivityMonitor) call relockAll() / relock(bundleID:) to restore blocking.
@@ -16,6 +17,7 @@ final class BlockingService: @unchecked Sendable {
     /// Unlock based on the source. Writes expiry timestamps to SharedStore and schedules
     /// the 3-minute warning notification. ManagedSettings blocking is cleared immediately.
     func unlockApp(source: UnlockSource) {
+        print("[BlockingService] unlockApp called — source: \(source)")
         let expiry = Date().addingTimeInterval(15 * 60)
 
         switch source {
@@ -29,6 +31,9 @@ final class BlockingService: @unchecked Sendable {
             SharedStore.shared.allAppsUnlockExpiry = expiry
             NotificationService.shared.cancelWarning(identifier: "allAppsUnlock")
             NotificationService.shared.scheduleUnlockWarning(expiry: expiry, identifier: "allAppsUnlock")
+
+            // Register DeviceActivity interval so MonitorExtension re-locks when it expires.
+            registerUnlockExpiry(identifier: "unlock-all", expiry: expiry)
 
         case .shield(let bundleID):
             // Per-app unshielding requires ApplicationToken, not a bundle ID string.
@@ -44,6 +49,33 @@ final class BlockingService: @unchecked Sendable {
             let notifID = "unlock-\(bundleID)"
             NotificationService.shared.cancelWarning(identifier: notifID)
             NotificationService.shared.scheduleUnlockWarning(expiry: expiry, identifier: notifID)
+
+            // Register DeviceActivity interval so MonitorExtension re-locks when it expires.
+            registerUnlockExpiry(identifier: "unlock-\(bundleID)", expiry: expiry)
+        }
+    }
+
+    /// Registers a one-shot DeviceActivity monitoring interval that ends at `expiry`.
+    /// MonitorExtension.intervalDidEnd fires at that time and performs the re-lock.
+    private func registerUnlockExpiry(identifier: String, expiry: Date) {
+        let cal = Calendar.current
+        let now = Date()
+        let startComponents = cal.dateComponents([.hour, .minute, .second], from: now)
+        let endComponents = cal.dateComponents([.hour, .minute, .second], from: expiry)
+
+        let schedule = DeviceActivitySchedule(
+            intervalStart: startComponents,
+            intervalEnd: endComponents,
+            repeats: false
+        )
+
+        do {
+            try DeviceActivityCenter().startMonitoring(
+                DeviceActivityName(identifier),
+                during: schedule
+            )
+        } catch {
+            print("[BlockingService] Failed to register unlock expiry '\(identifier)': \(error)")
         }
     }
 

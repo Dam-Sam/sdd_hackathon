@@ -70,6 +70,54 @@ final class SharedStore: @unchecked Sendable {
         }
     }
 
+    // MARK: - Session Tracking (written by DeviceActivityMonitor)
+
+    /// Set to Date() when a session starts. Used to compute sessionDuration on end.
+    var sessionStartTime: Date? {
+        get { defaults.object(forKey: Keys.sessionStartTime) as? Date }
+        set { defaults.set(newValue, forKey: Keys.sessionStartTime) }
+    }
+
+    // MARK: - Schedule End Times (written by main app at onboarding/settings)
+
+    /// Maps day ID (1=Mon … 7=Sun) to the scheduled end time for that day.
+    /// DeviceActivityMonitor reads this on session start to set sessionEndTime.
+    var scheduledEndTimes: [Int: Date] {
+        get {
+            guard let data = defaults.data(forKey: Keys.scheduledEndTimes),
+                  let decoded = try? JSONDecoder().decode([String: Date].self, from: data) else {
+                return [:]
+            }
+            return Dictionary(uniqueKeysWithValues: decoded.compactMap { k, v in
+                Int(k).map { ($0, v) }
+            })
+        }
+        set {
+            let stringKeyed = Dictionary(uniqueKeysWithValues: newValue.map { ("\($0.key)", $0.value) })
+            if let encoded = try? JSONEncoder().encode(stringKeyed) {
+                defaults.set(encoded, forKey: Keys.scheduledEndTimes)
+            }
+        }
+    }
+
+    // MARK: - Pending Session Log (written by extension, consumed by main app)
+
+    /// Written by DeviceActivityMonitor on session end. Main app reads this on HomeView appear
+    /// and persists it as a SwiftData SessionLog, then clears this value.
+    var pendingSessionLog: PendingSessionLog? {
+        get {
+            guard let data = defaults.data(forKey: Keys.pendingSessionLog) else { return nil }
+            return try? JSONDecoder().decode(PendingSessionLog.self, from: data)
+        }
+        set {
+            if let value = newValue, let encoded = try? JSONEncoder().encode(value) {
+                defaults.set(encoded, forKey: Keys.pendingSessionLog)
+            } else {
+                defaults.removeObject(forKey: Keys.pendingSessionLog)
+            }
+        }
+    }
+
     // MARK: - Onboarding
 
     /// Guards the onboarding flow. Once true, never show wizard again.
@@ -101,6 +149,9 @@ final class SharedStore: @unchecked Sendable {
         static let sessionEndTime = "sessionEndTime"
         static let allAppsUnlockExpiry = "allAppsUnlockExpiry"
         static let individualUnlockExpiries = "individualUnlockExpiries"
+        static let sessionStartTime = "sessionStartTime"
+        static let scheduledEndTimes = "scheduledEndTimes"
+        static let pendingSessionLog = "pendingSessionLog"
         static let hasCompletedOnboarding = "hasCompletedOnboarding"
         static let onboardingStep = "onboardingStep"
         static let authorizationStatus = "authorizationStatus"

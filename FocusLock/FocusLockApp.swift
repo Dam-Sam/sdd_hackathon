@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import FamilyControls
+import ManagedSettings
 
 @main
 struct FocusLockApp: App {
@@ -10,11 +11,12 @@ struct FocusLockApp: App {
     // Flip stubStatus to "authorized" to test the onboarding path, "denied" to test the gate.
     // Set useAuthStub = false when you have the real entitlement and want to test on device.
     #if DEBUG
-    private let useAuthStub = true
+    private let useAuthStub = false
     private let stubStatus = "authorized"   // "denied" | "authorized" | "notDetermined"
     #endif
 
     @State private var router = AppRouter()
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
@@ -29,6 +31,11 @@ struct FocusLockApp: App {
                 }
         }
         .modelContainer(for: [Schedule.self, DaySchedule.self, SessionLog.self])
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                consumePendingShieldUnlock()
+            }
+        }
     }
 
     // MARK: - Authorization
@@ -41,7 +48,7 @@ struct FocusLockApp: App {
             // Remove these lines if you want to test post-onboarding screens.
             SharedStore.shared.hasCompletedOnboarding = false
             SharedStore.shared.onboardingStep = 0
-            SharedStore.shared.allAppsUnlockExpiry = Date().addingTimeInterval(300)
+            SharedStore.shared.allAppsUnlockExpiry = nil
             return
         }
         #endif
@@ -52,6 +59,19 @@ struct FocusLockApp: App {
         } catch {
             SharedStore.shared.authorizationStatus = "denied"
         }
+    }
+
+    // MARK: - Shield Handoff
+
+    /// Reads SharedStore.pendingShieldUnlockToken written by ShieldActionExt when the user
+    /// taps "Unlock" on a blocked app's shield. Decodes the ApplicationToken and routes
+    /// to FrictionRouter with .shieldToken(token) so BlockingService surgically unblocks
+    /// only that app on confirmation.
+    private func consumePendingShieldUnlock() {
+        guard let data = SharedStore.shared.pendingShieldUnlockToken else { return }
+        SharedStore.shared.pendingShieldUnlockToken = nil
+        guard let token = try? JSONDecoder().decode(ApplicationToken.self, from: data) else { return }
+        router.pendingUnlockSource = .shieldToken(token)
     }
 
     // MARK: - URL Scheme

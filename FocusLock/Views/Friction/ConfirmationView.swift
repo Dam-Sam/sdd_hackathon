@@ -32,8 +32,10 @@ struct ConfirmationView: View {
                 .frame(maxWidth: .infinity)
 
                 Button("Yes") {
-                    BlockingService.shared.unlockApp(source: source)
                     onDismiss()
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        BlockingService.shared.unlockApp(source: source)
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(.red)

@@ -17,30 +17,27 @@ final class BlockingService: @unchecked Sendable {
     /// Unlock based on the source. Writes expiry timestamps to SharedStore and schedules
     /// the 3-minute warning notification. ManagedSettings blocking is cleared immediately.
     func unlockApp(source: UnlockSource) {
-        print("[BlockingService] unlockApp called — source: \(source)")
+        print("[BlockingService] unlockApp START — source: \(source), thread: \(Thread.isMainThread ? "main" : "bg")")
         let expiry = Date().addingTimeInterval(15 * 60)
 
         switch source {
         case .homeScreen:
-            // Remove all apps from the shield set.
+            print("[BlockingService] clearing shield...")
             store.shield.applications = nil
+            print("[BlockingService] shield cleared")
 
-            // Supersede any per-app unlocks — all-apps unlock covers everything.
             SharedStore.shared.individualUnlockExpiries = [:]
-
             SharedStore.shared.allAppsUnlockExpiry = expiry
             NotificationService.shared.cancelWarning(identifier: "allAppsUnlock")
             NotificationService.shared.scheduleUnlockWarning(expiry: expiry, identifier: "allAppsUnlock")
-
-            // Register DeviceActivity interval so MonitorExtension re-locks when it expires.
             registerUnlockExpiry(identifier: "unlock-all", expiry: expiry)
 
         case .shield(let bundleID):
-            // Per-app unshielding requires ApplicationToken, not a bundle ID string.
-            // ApplicationToken only flows through the ShieldConfigExtension (Step 9).
-            // Until then: clear all shielding so the user can access the app.
-            // Step 9 will refine this to surgical per-app removal once the token is available.
+            // URL scheme / manual testing path — no ApplicationToken available,
+            // so fall back to clearing all shields.
+            print("[BlockingService] clearing shield (per-app, fallback all-clear)...")
             store.shield.applications = nil
+            print("[BlockingService] shield cleared")
 
             var expiries = SharedStore.shared.individualUnlockExpiries
             expiries[bundleID] = expiry
@@ -49,10 +46,28 @@ final class BlockingService: @unchecked Sendable {
             let notifID = "unlock-\(bundleID)"
             NotificationService.shared.cancelWarning(identifier: notifID)
             NotificationService.shared.scheduleUnlockWarning(expiry: expiry, identifier: notifID)
-
-            // Register DeviceActivity interval so MonitorExtension re-locks when it expires.
             registerUnlockExpiry(identifier: "unlock-\(bundleID)", expiry: expiry)
+
+        case .shieldToken(let token):
+            // Real shield flow — surgically remove only this app's token.
+            print("[BlockingService] surgical shield removal for token...")
+            if var apps = store.shield.applications {
+                apps.remove(token)
+                store.shield.applications = apps.isEmpty ? nil : apps
+            }
+            print("[BlockingService] surgical removal complete")
+
+            let tokenID = "shieldToken-\(token.hashValue)"
+            var expiries = SharedStore.shared.individualUnlockExpiries
+            expiries[tokenID] = expiry
+            SharedStore.shared.individualUnlockExpiries = expiries
+
+            NotificationService.shared.cancelWarning(identifier: tokenID)
+            NotificationService.shared.scheduleUnlockWarning(expiry: expiry, identifier: tokenID)
+            registerUnlockExpiry(identifier: tokenID, expiry: expiry)
         }
+
+        print("[BlockingService] unlockApp END")
     }
 
     /// Registers a one-shot DeviceActivity monitoring interval that ends at `expiry`.
@@ -69,13 +84,17 @@ final class BlockingService: @unchecked Sendable {
             repeats: false
         )
 
-        do {
-            try DeviceActivityCenter().startMonitoring(
-                DeviceActivityName(identifier),
-                during: schedule
-            )
-        } catch {
-            print("[BlockingService] Failed to register unlock expiry '\(identifier)': \(error)")
+        // DeviceActivityCenter.startMonitoring does IPC with a system process —
+        // always run it off the main thread to avoid blocking the UI.
+        Task.detached {
+            do {
+                try DeviceActivityCenter().startMonitoring(
+                    DeviceActivityName(identifier),
+                    during: schedule
+                )
+            } catch {
+                print("[BlockingService] Failed to register unlock expiry '\(identifier)': \(error)")
+            }
         }
     }
 

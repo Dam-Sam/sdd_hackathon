@@ -136,3 +136,4 @@ class MonitorExtension: DeviceActivityMonitor {
         return Int(suffix)
     }
 }
+

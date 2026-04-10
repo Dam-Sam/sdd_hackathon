@@ -118,6 +118,93 @@
 
 **Comprehension check answer:** "NavigationStack push" — incorrect. Correct answer: `@AppStorage` write in `ContentView` triggers re-render which swaps the view. Brief explanation given pointing to `ContentView.swift` line 25.
 
+### Step 4: Onboarding — schedule setup, custom schedule, and wizard resume
+
+**What was built:**
+- `ScheduleSetupView.swift` — Form with "Every weekday" toggle, start/end `DatePicker` (9 AM / 5 PM defaults), "Include weekends" toggle, "Custom schedule" NavigationLink, and Finish button; `onChange` syncs default time pickers to all enabled days; `saveAndFinish()` deletes existing `Schedule` records, inserts new `Schedule` + `DaySchedule` objects via SwiftData `modelContext`, writes `hasCompletedOnboarding = true` to SharedStore
+- `CustomScheduleView.swift` — Form with 7 day sections; each has a Toggle and conditionally-visible start/end DatePickers when enabled; receives `$days` binding from ScheduleSetupView; Done button dismisses
+- `DayConfig` struct (file-level in ScheduleSetupView.swift) — in-memory representation shared between both views
+- Wizard resume already handled by ContentView routing (`onboardingStep == 1` → ScheduleSetupView); confirmed working via force-quit + relaunch test
+- `xcodegen generate` re-run after new file creation
+
+**Issues encountered:** None.
+
+**Learner verification observation:** Saw all expected UI elements. Confirmed Custom view shows per-day toggles and time pickers. Confirmed Finish navigates to home screen. Force-quit + relaunch resumed at schedule setup (not app selection).
+
+**Comprehension check answer:** "6:00 PM" — correct. Understood that `@Binding` passes a reference to the parent's state, so edits in CustomScheduleView write through to ScheduleSetupView's `days` array directly.
+
+### Step 5: Home screen — lock icon, session countdown, time saved today, unlock button
+
+**What was built:**
+- `HomeView.swift` — full implementation replacing the Step 5 placeholder
+- Top-to-bottom layout: session countdown (monospaced, `Timer.publish` every 1s, shows "0:00" when no session), lock icon (SF Symbol `lock.fill` red / `lock.open.fill` secondary), time saved today (`@Query` on `SessionLog` filtered to today, `sessionDuration - totalUnlockMinutes` summed), Unlock button (`.disabled(!isSessionActive)`), secondary countdown (orange, visible only when `allAppsUnlockExpiry` is non-nil and in the future)
+- `Date?` values (`sessionEndTime`, `allAppsUnlockExpiry`) polled from `SharedStore.shared` on each timer tick — `@AppStorage` doesn't support `Optional<Date>` natively
+- Unlock button is a stub — `FrictionRouter` wired in step 6
+- `ScheduleView.swift` updated with `@AppStorage("isSessionActive")` session editing gate; orange lock label displayed when session is active (edit controls added in step 10)
+
+**Issues encountered:** None. Build SUCCEEDED on first attempt with one existing warning (nonisolated(unsafe) on SharedStore.shared — pre-existing, not introduced in this step).
+
+**Learner verification observation:** Confirmed open lock + 0:00 + grayed Unlock on home screen. Manually set `isSessionActive = true` and `sessionEndTime` in code — confirmed lock closed (red), countdown ticked, Unlock enabled. Set `allAppsUnlockExpiry` — confirmed secondary orange countdown appeared. Navigated to Schedule tab with session active — confirmed orange gate label appeared.
+
+**Comprehension check answer:** "@AppStorage only works in the main app target" — incorrect. Correct answer: `@AppStorage` doesn't natively support `Optional<Date>` (type gap, not target gap). Brief explanation given: `@AppStorage` accepts `String`, `Bool`, `Int`, `Double`, `Data` — not `Date?`, so the timer poll is the workaround.
+
+### Step 6: Friction activities — FrictionRouter, MinimalView, ModerateView, ExtremeView, ConfirmationView
+
+**What was built:**
+- `AppRouter.swift` — `@Observable` class with `pendingUnlockSource: UnlockSource?`; set by Unlock button or URL handler, observed by ContentView to present FrictionRouter as fullScreenCover
+- `FrictionRouter.swift` — defines `UnlockSource` (Identifiable enum), `ModerateActivity` enum, and `FrictionRouter` view; picks activity at `init()` time via `State(initialValue:)`; routes to MinimalView / ModerateView / ExtremeView; on completion, swaps to ConfirmationView via `@State var activityCompleted`
+- `MinimalView.swift` — cat image (SF Symbol fallback until real images added to Assets.xcassets/CatImages/) + random guilt-trip string; "OK" dismisses, "No" → ConfirmationView
+- `MotionService.swift` — `@Observable` CMMotionManager wrapper; rotation via Z-axis cumulative tracking (±2π per rotation), shake via acceleration magnitude > 2.5g with 0.5s debounce; observable `rotationCount` / `shakeCount` auto-update ModerateView progress display
+- `ModerateView.swift` — wait (10s timer + ProgressView), rotate (MotionService rotation detection), shake (MotionService shake detection); simulator debug button for rotate/shake; resets on `sceneDidBecomeActive` via NotificationCenter
+- `ExtremeView.swift` — generates `(a × b) + c` problem at init; text field + Submit; incorrect answer shows "Incorrect" banner for 2s and resets input
+- `ConfirmationView.swift` — reads `sessionEndTime` from SharedStore for time-remaining string; "Stay Focused" → dismiss; "Yes" → prints (BlockingService wired in Step 7)
+- `HomeView.swift` updated — `isAppsUnlocked` computed property (allAppsUnlockExpiry > now); lock icon shows green open lock when unlocked; Unlock button disabled when `!isSessionActive || isAppsUnlocked`
+- `FocusLockApp.swift` updated — `@State private var router = AppRouter()`; `.environment(router)` on ContentView; `handleURL` now routes `source=home` → `.homeScreen` and `source=shield&app=<id>` → `.shield(bundleID:)`
+- `ContentView.swift` updated — `@Environment(AppRouter.self)`, `@Bindable var router = router`; `.fullScreenCover(item: $router.pendingUnlockSource)` presents FrictionRouter
+
+**Issues encountered:**
+- Bug caught during verification: HomeView lock icon stayed red and Unlock button remained enabled when `allAppsUnlockExpiry` was active. Fixed by adding `isAppsUnlocked` computed property and using it in both the icon color logic and the button's `.disabled()` modifier.
+
+**Learner verification observation:** Confirmed green open lock and disabled Unlock button when unlock window active. Confirmed "Yes" console print in Xcode debugger.
+
+**Comprehension check answer:** "Body rerenders would repick a new activity" — correct. Understood that the view body runs on every state change, so `@State(initialValue:)` in `init()` is the right place to lock in the random selection for the session.
+
+### Step 7: BlockingService + NotificationService — unlock logic and re-lock scheduling
+
+**What was built:**
+- `BlockingService.swift` — `unlockApp(source:)` handles both `.homeScreen` (clear all ManagedSettings shielding, write `allAppsUnlockExpiry = now + 15min`, supersede individual expiries) and `.shield(bundleID)` (clear all shielding as fallback, write `individualUnlockExpiries[bundleID] = now + 15min`); `relockAll()` restores full shielding from `SharedStore.blockedApps`; `relock(bundleID:)` calls `relockAll()` as a safe fallback pending token availability in Step 9
+- `NotificationService.swift` — `scheduleUnlockWarning(expiry:identifier:)` fires at `expiry - 3min`; `cancelWarning(identifier:)` removes pending requests; `requestPermission()` called on launch from `FocusLockApp`
+- `ConfirmationView.swift` updated — "Yes" button now calls `BlockingService.shared.unlockApp(source: source)` instead of printing a stub
+- `FocusLockApp.swift` updated — `allAppsUnlockExpiry` debug stub line changed from `now + 300s` to `nil` (was causing app to appear pre-unlocked on every launch); notification permission requested on startup
+- Note: per-app surgical unshielding (`.shield` case) deferred to Step 9 — ManagedSettings requires `ApplicationToken`, not a bundle ID string; the token flows through `ShieldConfigExtension`
+
+**Issues encountered:**
+- Swift 6 concurrency: `BlockingService.shared` and `NotificationService.shared` static properties required `nonisolated(unsafe)` and `@unchecked Sendable` (same pattern as SharedStore in Step 1)
+- Debug stub from Step 6 was writing `allAppsUnlockExpiry = now + 300s` on every launch, causing the app to open in an already-unlocked state — removed
+
+**Learner verification observation:** Orange secondary countdown appeared on HomeView after tapping "Yes" in ConfirmationView, confirming `allAppsUnlockExpiry` was written correctly. Print statement confirmed `unlockApp` was being called. Breakpoints did not trigger (debugger quirk with Swift singletons); print-based verification used instead.
+
+---
+
+### Step 8: DeviceActivityMonitor extension — session enforcement and unlock expiry re-lock
+
+**What was built:**
+- `MonitorExtension.swift` fully implemented — handles session start (activate ManagedSettings blocking, write isSessionActive/sessionStartTime/sessionEndTime), session end (relockAll, compute duration, write PendingSessionLog, clear session state), all-apps unlock expiry (relockAll, clear allAppsUnlockExpiry), per-app unlock expiry (relock bundleID, remove from individualUnlockExpiries)
+- `Shared/PendingSessionLog.swift` — Codable bridge struct for extension → main app session data handoff (extensions can't write SwiftData)
+- `SharedStore.swift` extended with sessionStartTime, scheduledEndTimes ([Int: Date] per day), and pendingSessionLog
+- `ScheduleSetupView.swift` — saveAndFinish() now registers DeviceActivitySchedule per enabled day (weekday DateComponent restricts to correct day of week), stores scheduledEndTimes in SharedStore
+- `BlockingService.swift` — unlockApp() now registers one-shot DeviceActivity intervals for 15-minute unlock expiry re-lock; DeviceActivity call moved to background thread (DispatchQueue.global) to avoid blocking UI
+- `HomeView.swift` — consumePendingSessionLog() reads pending log from SharedStore on appear and persists to SwiftData
+
+**Issues encountered:**
+- `DeviceActivityCenter` has no `.shared` singleton in this SDK — fixed to `DeviceActivityCenter()`
+- `DeviceActivityCenter().startMonitoring()` was blocking the main thread — moved to `DispatchQueue.global(qos: .userInitiated).async` in ConfirmationView and `Task.detached` in BlockingService
+- App appeared to freeze during testing — root cause was a debugger breakpoint, not a code issue
+
+**Learner verification observation:** Tapped DEBUG: Start Session, confirmed lock closed and countdown started. Tapped Unlock, completed friction, tapped Yes — secondary orange countdown appeared. Opened a selected blocked app — confirmed it was blocked. ManagedSettings is working with developer signing.
+
+**Comprehension check answer:** "Extensions are separate processes" — correct. Understood that each target compiles to its own binary with its own process and memory space; SharedStore.swift is compiled into each target separately and shares data at runtime via App Group UserDefaults.
+
 ---
 
 ## /checklist

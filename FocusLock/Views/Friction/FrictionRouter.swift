@@ -1,16 +1,19 @@
 import SwiftUI
+import ManagedSettings
 
 // MARK: - Unlock Source
 
 /// Where the unlock request originated. Determines which apps are unlocked in BlockingService.
 enum UnlockSource: Identifiable {
-    case homeScreen                     // unlocks ALL blocked apps
-    case shield(bundleID: String)       // unlocks ONE specific app
+    case homeScreen                         // unlocks ALL blocked apps
+    case shield(bundleID: String)           // unlocks one app (URL scheme / manual testing path)
+    case shieldToken(ApplicationToken)      // unlocks one app (real shield flow; surgical)
 
     var id: String {
         switch self {
-        case .homeScreen: return "homeScreen"
-        case .shield(let bundleID): return "shield-\(bundleID)"
+        case .homeScreen:               return "homeScreen"
+        case .shield(let bundleID):     return "shield-\(bundleID)"
+        case .shieldToken(let token):   return "shieldToken-\(token.hashValue)"
         }
     }
 }

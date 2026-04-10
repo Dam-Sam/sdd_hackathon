@@ -118,6 +118,17 @@ final class SharedStore: @unchecked Sendable {
         }
     }
 
+    // MARK: - Shield Handoff
+
+    /// Encoded ApplicationToken written by ShieldActionExt when the user taps Unlock
+    /// on a blocked app's shield. FocusLockApp decodes it on foreground, passes the
+    /// token to FrictionRouter as .shieldToken so BlockingService can do surgical
+    /// per-app unblocking without clearing other apps' unlock windows.
+    var pendingShieldUnlockToken: Data? {
+        get { defaults.data(forKey: Keys.pendingShieldUnlockToken) }
+        set { defaults.set(newValue, forKey: Keys.pendingShieldUnlockToken) }
+    }
+
     // MARK: - Onboarding
 
     /// Guards the onboarding flow. Once true, never show wizard again.
@@ -152,6 +163,7 @@ final class SharedStore: @unchecked Sendable {
         static let sessionStartTime = "sessionStartTime"
         static let scheduledEndTimes = "scheduledEndTimes"
         static let pendingSessionLog = "pendingSessionLog"
+        static let pendingShieldUnlockToken = "pendingShieldUnlockToken"
         static let hasCompletedOnboarding = "hasCompletedOnboarding"
         static let onboardingStep = "onboardingStep"
         static let authorizationStatus = "authorizationStatus"

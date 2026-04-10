@@ -50,6 +50,36 @@
             endingLineNumber = "41"
             landmarkName = "scheduleUnlockWarning(expiry:identifier:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8864FF40-5191-40E8-8868-A6B8C74269DC - e4868b59fc618c62"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FocusLock.NotificationService.scheduleUnlockWarning(expiry: Foundation.Date, identifier: Swift.String) -&gt; ()"
+                  moduleName = "FocusLock.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Services/NotificationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41">
+               </Location>
+               <Location
+                  uuid = "8864FF40-5191-40E8-8868-A6B8C74269DC - f22ee694b74b2e75"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FocusLock.NotificationService.scheduleUnlockWarning(expiry: Foundation.Date, identifier: Swift.String) -&gt; ()"
+                  moduleName = "FocusLock.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Services/NotificationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

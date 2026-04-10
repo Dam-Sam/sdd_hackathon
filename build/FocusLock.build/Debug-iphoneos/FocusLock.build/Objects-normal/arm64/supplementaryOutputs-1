@@ -1,0 +1,23 @@
+{
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Services/AppRouter.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.dia",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.swiftdeps"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Onboarding/AppSelectionView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.dia",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.swiftdeps"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Onboarding/AuthorizationGateView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.dia",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.swiftdeps"
+  }
+}

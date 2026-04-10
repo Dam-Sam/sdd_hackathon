@@ -1,0 +1,229 @@
+{
+  "" : {
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLock-primary.dia",
+    "emit-module-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLock-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLock-primary-emit-module.dia",
+    "pch" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLock-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLock-primary.swiftdeps"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/ContentView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/FocusLockApp.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLockApp.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLockApp.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLockApp.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLockApp.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLockApp.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLockApp.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLockApp.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusLockApp~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Models/FocusData.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusData.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusData.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusData.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusData.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusData.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusData.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusData.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FocusData~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Services/AppRouter.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppRouter~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Services/BlockingService.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/BlockingService.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/BlockingService.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/BlockingService.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/BlockingService.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/BlockingService.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/BlockingService.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/BlockingService.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/BlockingService~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Services/MotionService.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MotionService.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MotionService.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MotionService.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MotionService.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MotionService.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MotionService.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MotionService.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MotionService~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Services/NotificationService.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/NotificationService.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/NotificationService.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/NotificationService.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/NotificationService.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/NotificationService.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/NotificationService.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/NotificationService.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/NotificationService~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Friction/ConfirmationView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ConfirmationView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ConfirmationView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ConfirmationView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ConfirmationView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ConfirmationView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ConfirmationView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ConfirmationView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ConfirmationView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Friction/ExtremeView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ExtremeView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ExtremeView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ExtremeView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ExtremeView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ExtremeView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ExtremeView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ExtremeView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ExtremeView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Friction/FrictionRouter.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FrictionRouter.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FrictionRouter.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FrictionRouter.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FrictionRouter.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FrictionRouter.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FrictionRouter.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FrictionRouter.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/FrictionRouter~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Friction/MinimalView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MinimalView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MinimalView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MinimalView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MinimalView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MinimalView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MinimalView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MinimalView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/MinimalView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Friction/ModerateView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ModerateView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ModerateView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ModerateView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ModerateView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ModerateView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ModerateView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ModerateView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ModerateView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Home/HomeView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/HomeView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/HomeView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/HomeView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/HomeView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/HomeView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/HomeView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/HomeView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/HomeView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Onboarding/AppSelectionView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AppSelectionView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Onboarding/AuthorizationGateView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/AuthorizationGateView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Onboarding/CustomScheduleView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/CustomScheduleView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/CustomScheduleView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/CustomScheduleView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/CustomScheduleView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/CustomScheduleView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/CustomScheduleView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/CustomScheduleView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/CustomScheduleView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Onboarding/ScheduleSetupView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleSetupView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleSetupView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleSetupView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleSetupView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleSetupView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleSetupView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleSetupView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleSetupView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Schedule/ScheduleView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/ScheduleView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/FocusLock/Views/Stats/StatsView.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/StatsView.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/StatsView.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/StatsView.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/StatsView.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/StatsView.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/StatsView.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/StatsView.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/StatsView~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/Shared/PendingSessionLog.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/PendingSessionLog.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/PendingSessionLog.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/PendingSessionLog.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/PendingSessionLog.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/PendingSessionLog.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/PendingSessionLog.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/PendingSessionLog.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/PendingSessionLog~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/Shared/SharedStore.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/SharedStore.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/SharedStore.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/SharedStore.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/SharedStore.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/SharedStore.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/SharedStore.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/SharedStore.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/SharedStore~partial.swiftmodule"
+  },
+  "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/sam/Desktop/Projects/sdd_hackathon/build/FocusLock.build/Debug-iphoneos/FocusLock.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

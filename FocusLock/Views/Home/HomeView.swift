@@ -54,6 +54,28 @@ struct HomeView: View {
                 .buttonStyle(.borderedProminent)
                 .disabled(!isSessionActive || isAppsUnlocked)
 
+                // MARK: Debug controls (DEBUG builds only)
+                #if DEBUG
+                Divider()
+                VStack(spacing: 12) {
+                    Button("DEBUG: Start Session") {
+                        SharedStore.shared.isSessionActive = true
+                        SharedStore.shared.sessionEndTime = Date().addingTimeInterval(30 * 60)
+                        BlockingService.shared.relockAll()
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.red)
+
+                    Button("DEBUG: End Session") {
+                        SharedStore.shared.isSessionActive = false
+                        SharedStore.shared.sessionEndTime = nil
+                        BlockingService.shared.relockAll()
+                    }
+                    .buttonStyle(.bordered)
+                }
+                .font(.caption)
+                #endif
+
                 // MARK: Secondary countdown (visible only when allAppsUnlockExpiry is set)
                 if let expiry = allAppsUnlockExpiry, expiry > now {
                     VStack(spacing: 4) {

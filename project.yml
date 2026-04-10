@@ -58,6 +58,8 @@ targets:
         embed: true
       - target: ShieldConfiguration
         embed: true
+      - target: ShieldAction
+        embed: true
 
   DeviceActivityMonitor:
     type: app-extension
@@ -112,6 +114,35 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock.ShieldConfiguration
         INFOPLIST_FILE: ShieldConfiguration/Info.plist
         CODE_SIGN_ENTITLEMENTS: ShieldConfiguration/ShieldConfiguration.entitlements
+    dependencies:
+      - sdk: ManagedSettings.framework
+      - sdk: ManagedSettingsUI.framework
+      - sdk: FamilyControls.framework
+
+  ShieldAction:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: ShieldAction
+      - path: Shared
+    entitlements:
+      path: ShieldAction/ShieldAction.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.focuslock
+        com.apple.developer.family-controls: true
+    info:
+      path: ShieldAction/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.screentime.shield.action
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldActionExt
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock.ShieldAction
+        INFOPLIST_FILE: ShieldAction/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ShieldAction/ShieldAction.entitlements
     dependencies:
       - sdk: ManagedSettings.framework
       - sdk: ManagedSettingsUI.framework

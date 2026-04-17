@@ -24,6 +24,7 @@ struct DayConfig: Identifiable {
 /// Also reused from ScheduleView's "Change Time" button (Step 10).
 struct ScheduleSetupView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
 
     // Default times
     private static let nineAM = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!
@@ -128,21 +129,35 @@ struct ScheduleSetupView: View {
         let schedule = Schedule(days: daySchedules)
         modelContext.insert(schedule)
 
-        // Store scheduled end times so MonitorExtension can reconstruct sessionEndTime.
+        // Store start and end times so MonitorExtension can reconstruct sessionEndTime
+        // and FocusLockApp can detect mid-interval launches.
+        let startTimes = days.filter(\.isEnabled).reduce(into: [Int: Date]()) { dict, day in
+            dict[day.id] = day.startTime
+        }
         let endTimes = days.filter(\.isEnabled).reduce(into: [Int: Date]()) { dict, day in
             dict[day.id] = day.endTime
         }
+        SharedStore.shared.scheduledStartTimes = startTimes
         SharedStore.shared.scheduledEndTimes = endTimes
 
-        // Register DeviceActivity monitoring for each enabled day.
-        registerDeviceActivitySchedules()
-
+        // Navigate immediately — registration fires in a detached Task (same pattern
+        // as BlockingService; DeviceActivityCenter IPC must not block the main thread).
         SharedStore.shared.hasCompletedOnboarding = true
+
+        // In the settings/sheet context, dismiss the sheet. In the onboarding context,
+        // ContentView swaps the view away via @AppStorage and this is a no-op.
+        dismiss()
+
+        let daysSnapshot = days
+        Task.detached(priority: .userInitiated) {
+            ScheduleSetupView.registerDeviceActivitySchedules(days: daysSnapshot)
+        }
     }
 
     /// Registers one DeviceActivitySchedule per enabled day.
-    /// The weekday component restricts each activity to its specific day of the week.
-    private func registerDeviceActivitySchedules() {
+    /// Static so it carries no actor context from the view — safe to call from Task.detached.
+    /// DeviceActivityCenter does XPC with a system daemon; must run off the main thread.
+    private nonisolated static func registerDeviceActivitySchedules(days: [DayConfig]) {
         let center = DeviceActivityCenter()
 
         // Clear any previously registered focus sessions before re-registering.
@@ -169,6 +184,7 @@ struct ScheduleSetupView: View {
                     DeviceActivityName("focus-session-\(day.id)"),
                     during: activitySchedule
                 )
+                print("[ScheduleSetupView] Registered day \(day.id) (\(day.name)): \(startComponents.hour ?? 0):\(String(format: "%02d", startComponents.minute ?? 0))–\(endComponents.hour ?? 0):\(String(format: "%02d", endComponents.minute ?? 0))")
             } catch {
                 print("[ScheduleSetupView] Failed to register day \(day.id): \(error)")
             }

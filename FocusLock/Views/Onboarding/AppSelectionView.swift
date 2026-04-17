@@ -2,15 +2,31 @@ import SwiftUI
 import FamilyControls
 
 struct AppSelectionView: View {
-    private static let store = UserDefaults(suiteName: "group.focuslock")
+    private static let store = UserDefaults(suiteName: "group.com.sddhackathon.focuslock")
 
     /// Writing onboardingStep = 1 triggers ContentView to swap to ScheduleSetupView.
     @AppStorage("onboardingStep", store: store)
     private var onboardingStep: Int = 0
 
-    @State private var selection = FamilyActivitySelection()
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var selection: FamilyActivitySelection
     @State private var isPickerPresented = false
-    @State private var frictionTier = "minimal"
+    @State private var frictionTier: String
+
+    // Pre-populate from SharedStore so the picker reflects already-saved settings
+    // when opened from the Schedule tab's "Apps" button.
+    init() {
+        let savedSelection: FamilyActivitySelection
+        if let data = SharedStore.shared.blockedApps,
+           let decoded = try? PropertyListDecoder().decode(FamilyActivitySelection.self, from: data) {
+            savedSelection = decoded
+        } else {
+            savedSelection = FamilyActivitySelection()
+        }
+        _selection = State(initialValue: savedSelection)
+        _frictionTier = State(initialValue: SharedStore.shared.frictionTier)
+    }
 
     // DEBUG: FamilyActivityPicker doesn't function in the simulator — no Family Controls support.
     // Tap "Dev: Force-enable Continue" to test the rest of the flow without a real selection.
@@ -128,8 +144,13 @@ struct AppSelectionView: View {
         }
         SharedStore.shared.frictionTier = frictionTier
 
-        // Writing onboardingStep triggers ContentView's @AppStorage to re-render,
-        // swapping this view out for ScheduleSetupView.
-        SharedStore.shared.onboardingStep = 1
+        if SharedStore.shared.hasCompletedOnboarding {
+            // Settings context (sheet from Schedule tab) — just save and dismiss.
+            dismiss()
+        } else {
+            // Onboarding context — writing onboardingStep triggers ContentView's @AppStorage
+            // to re-render, swapping this view out for ScheduleSetupView.
+            SharedStore.shared.onboardingStep = 1
+        }
     }
 }

@@ -241,6 +241,18 @@
 
 **Comprehension check answer:** "PropertyListEncoder was used to save it" — correct. Understood that the decoder must match the encoder that wrote the bytes; mismatching would cause the decode to return nil and the picker to open empty.
 
+### Step 11: Submit your project to Devpost
+
+**What was built:**
+- `.gitignore` created — excluded `build/`, Xcode user data, `.DS_Store`
+- Build artifacts removed from git tracking via `git rm --cached`
+- All source commits pushed to `github.com/Dam-Sam/sdd_hackathon`
+- Devpost submission completed: project name (FocusLock), tagline ("Take back your time"), project story drawn from scope.md and prd.md, built-with tags (Swift, SwiftUI, SwiftData, FamilyControls, ManagedSettings, DeviceActivity, CoreMotion, iOS 26), screenshots, docs folder artifacts, GitHub repo link
+
+**Learner verification observation:** Submission confirmed live on Devpost.
+
+---
+
 ## /checklist
 
 **Sequencing decisions:** Scaffold-first approach: three-target Xcode project + SharedStore + SwiftData models before any feature work. Authorization gate second — gates all subsequent UI. Onboarding before home screen (home screen reads SharedStore values written during onboarding). Friction activities before BlockingService (router needs to exist before unlock calls through). Extensions (DeviceActivityMonitor, ShieldConfiguration) after the blocking layer is wired — they depend on SharedStore and BlockingService being functional. Schedule/Stats tabs last — pure read views that can be built once data is flowing.

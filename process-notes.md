@@ -207,6 +207,40 @@
 
 ---
 
+### Step 9: ShieldConfiguration extension — block screen UI and URL scheme routing
+
+**What was built:**
+- `ShieldAction/ShieldActionExt.swift` — new `ShieldActionDelegate` subclass (fourth target). On `.primaryButtonPressed`, encodes the `ApplicationToken` via `JSONEncoder` and writes to `SharedStore.pendingShieldUnlockToken: Data?`, then calls `completionHandler(.close)` to dismiss the shield
+- `ShieldAction` target added to `project.yml` with extension point `com.apple.screentime.shield.action`, App Group entitlement, and Family Controls entitlement. Embedded in FocusLock target
+- `Shared/SharedStore.swift` updated — added `pendingShieldUnlockToken: Data?` property and key
+- `FocusLock/Views/Friction/FrictionRouter.swift` updated — added `UnlockSource.shieldToken(ApplicationToken)` case with ManagedSettings import, enabling surgical per-app unblocking via the actual token rather than a fallback clear-all
+- `FocusLock/Services/BlockingService.swift` updated — added `.shieldToken(let token)` case: surgically removes only that token from `store.shield.applications`, tracks expiry via `"shieldToken-\(token.hashValue)"` key in `individualUnlockExpiries`
+- `FocusLock/FocusLockApp.swift` updated — added `import ManagedSettings`, `@Environment(\.scenePhase)` observer, and `consumePendingShieldUnlock()` method that decodes the stored `ApplicationToken` and routes to `FrictionRouter` with `.shieldToken(token)` on scene activation
+- ShieldConfigExtension visual (from Step 1 stub) already correct — "Stay Focused" / "You're in a focus session" / green "Unlock" button / no changes needed
+
+**Key open issue resolved:** `ShieldActionExtension` does not exist in this iOS 26 SDK — the correct class is `ShieldActionDelegate` in `ManagedSettings` (not `ManagedSettingsUI`). Also resolved: `ShieldActionDelegate` receives `ApplicationToken` (not `Application`), so bundle ID isn't available. Using `ApplicationToken` directly enables surgical per-app unblocking, which is better than the fallback `store.shield.applications = nil` used previously.
+
+**Issues encountered:**
+- `ShieldActionExtension` not found at compile — correct class is `ShieldActionDelegate` in `ManagedSettings`
+- `JSONEncoder` not in scope in ShieldAction extension target — fixed by adding `import Foundation`
+
+**Verification note:** Full shield flow (tapping blocked app → shield UI → Unlock → friction → confirm) requires Family Controls entitlement and device testing. URL scheme routing verified manually via `focuslock://unlock?source=shield&app=<bundleID>` in Xcode debugger (already wired in Step 7). The pendingShieldUnlockToken handoff can be tested by writing a token to SharedStore directly and putting FocusLock in the foreground.
+
+### Step 10: Schedule & Stats tabs — read-only schedule view and cumulative time saved
+
+**What was built:**
+- `ScheduleView.swift` — `@Query` on `Schedule`, sorted days list (1–7), disabled days shown greyed/dimmed at 50% opacity, "Change Time" and "Apps" buttons presenting `ScheduleSetupView` and `AppSelectionView` as sheets, both buttons `.disabled(isSessionActive)`, session gate notice shown when locked
+- `StatsView.swift` — `@Query` on all `SessionLog` records, `reduce` over `timeSaved` computed property, formatted as "Xh Ym" (or just "Ym" / "Xh" when one component is zero), `.contentTransition(.numericText())` on the counter
+- `ScheduleSetupView.swift` — added `@Environment(\.dismiss)` + `dismiss()` call in `saveAndFinish()`. No-op in onboarding context (ContentView swaps the view via `@AppStorage`); closes the sheet when called from Schedule tab
+- `AppSelectionView.swift` — added `init()` to pre-populate `selection` (via `PropertyListDecoder`) and `frictionTier` from SharedStore; added `@Environment(\.dismiss)`; `saveAndContinue()` now calls `dismiss()` when `hasCompletedOnboarding == true` (settings context) instead of advancing `onboardingStep`
+
+**Issues encountered:**
+- Change Time and Apps buttons appeared greyed out on first verification. Cause: `isSessionActive` was still `true` in SharedStore from Step 8 debug session testing — never explicitly ended. Fixed by tapping "DEBUG: End Session" on the Home screen.
+
+**Learner verification observation:** Confirmed all 7 days listed with correct times. Disabled days greyed. Change Time and Apps buttons both tappable (after clearing stale session state). Stats tab shows time saved counter (0m on fresh install — correct).
+
+**Comprehension check answer:** "PropertyListEncoder was used to save it" — correct. Understood that the decoder must match the encoder that wrote the bytes; mismatching would cause the decode to return nil and the picker to open empty.
+
 ## /checklist
 
 **Sequencing decisions:** Scaffold-first approach: three-target Xcode project + SharedStore + SwiftData models before any feature work. Authorization gate second — gates all subsequent UI. Onboarding before home screen (home screen reads SharedStore values written during onboarding). Friction activities before BlockingService (router needs to exist before unlock calls through). Extensions (DeviceActivityMonitor, ShieldConfiguration) after the blocking layer is wired — they depend on SharedStore and BlockingService being functional. Schedule/Stats tabs last — pure read views that can be built once data is flowing.

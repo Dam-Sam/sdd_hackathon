@@ -71,7 +71,11 @@ class MonitorExtension: DeviceActivityMonitor {
     // MARK: - Session End
 
     private func handleSessionEnd() {
-        relockAll()
+        // Session is over — remove all blocking so apps are freely accessible
+        // until the next scheduled session starts.
+        store.shield.applications = nil
+        SharedStore.shared.allAppsUnlockExpiry = nil
+        SharedStore.shared.individualUnlockExpiries = [:]
 
         // Compute how long the session ran (in minutes).
         let duration: Int
@@ -93,7 +97,7 @@ class MonitorExtension: DeviceActivityMonitor {
         SharedStore.shared.sessionEndTime = nil
         SharedStore.shared.sessionStartTime = nil
 
-        print("[MonitorExtension] Session ended — duration: \(duration)min")
+        print("[MonitorExtension] Session ended — duration: \(duration)min, apps unblocked")
     }
 
     // MARK: - ManagedSettings Helpers

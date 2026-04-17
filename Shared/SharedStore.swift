@@ -1,6 +1,6 @@
 import Foundation
 
-/// Wraps UserDefaults(suiteName: "group.focuslock").
+/// Wraps UserDefaults(suiteName: "group.com.sddhackathon.focuslock").
 /// All three targets (main app, DeviceActivityMonitor, ShieldConfiguration) share this file.
 /// Extensions only read. The main app writes.
 final class SharedStore: @unchecked Sendable {
@@ -10,8 +10,8 @@ final class SharedStore: @unchecked Sendable {
     private let defaults: UserDefaults
 
     private init() {
-        guard let defaults = UserDefaults(suiteName: "group.focuslock") else {
-            fatalError("App Group 'group.focuslock' not configured. Check entitlements.")
+        guard let defaults = UserDefaults(suiteName: "group.com.sddhackathon.focuslock") else {
+            fatalError("App Group 'group.com.sddhackathon.focuslock' not configured. Check entitlements.")
         }
         self.defaults = defaults
     }
@@ -79,6 +79,26 @@ final class SharedStore: @unchecked Sendable {
     }
 
     // MARK: - Schedule End Times (written by main app at onboarding/settings)
+
+    /// Maps day ID (1=Mon … 7=Sun) to the scheduled start time for that day.
+    /// Written by the main app at onboarding/settings. Used to detect mid-interval launches.
+    var scheduledStartTimes: [Int: Date] {
+        get {
+            guard let data = defaults.data(forKey: Keys.scheduledStartTimes),
+                  let decoded = try? JSONDecoder().decode([String: Date].self, from: data) else {
+                return [:]
+            }
+            return Dictionary(uniqueKeysWithValues: decoded.compactMap { k, v in
+                Int(k).map { ($0, v) }
+            })
+        }
+        set {
+            let stringKeyed = Dictionary(uniqueKeysWithValues: newValue.map { ("\($0.key)", $0.value) })
+            if let encoded = try? JSONEncoder().encode(stringKeyed) {
+                defaults.set(encoded, forKey: Keys.scheduledStartTimes)
+            }
+        }
+    }
 
     /// Maps day ID (1=Mon … 7=Sun) to the scheduled end time for that day.
     /// DeviceActivityMonitor reads this on session start to set sessionEndTime.
@@ -161,6 +181,7 @@ final class SharedStore: @unchecked Sendable {
         static let allAppsUnlockExpiry = "allAppsUnlockExpiry"
         static let individualUnlockExpiries = "individualUnlockExpiries"
         static let sessionStartTime = "sessionStartTime"
+        static let scheduledStartTimes = "scheduledStartTimes"
         static let scheduledEndTimes = "scheduledEndTimes"
         static let pendingSessionLog = "pendingSessionLog"
         static let pendingShieldUnlockToken = "pendingShieldUnlockToken"

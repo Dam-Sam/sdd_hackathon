@@ -1,8 +1,0 @@
-Target dependency graph (4 targets)
-Target 'FocusLock' in project 'FocusLock'
-➜ Explicit dependency on target 'DeviceActivityMonitor' in project 'FocusLock'
-➜ Explicit dependency on target 'ShieldConfiguration' in project 'FocusLock'
-➜ Explicit dependency on target 'ShieldAction' in project 'FocusLock'
-Target 'ShieldAction' in project 'FocusLock' (no dependencies)
-Target 'ShieldConfiguration' in project 'FocusLock' (no dependencies)
-Target 'DeviceActivityMonitor' in project 'FocusLock' (no dependencies)

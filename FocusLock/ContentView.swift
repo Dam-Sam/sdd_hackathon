@@ -3,7 +3,7 @@ import SwiftUI
 /// Root view. Routes between the authorization gate, onboarding wizard, and main tab bar.
 /// Also presents FrictionRouter as a fullScreenCover when AppRouter.pendingUnlockSource is set.
 struct ContentView: View {
-    private static let store = UserDefaults(suiteName: "group.focuslock")
+    private static let store = UserDefaults(suiteName: "group.com.sddhackathon.focuslock")
 
     @AppStorage("authorizationStatus", store: store)
     private var authStatus: String = "notDetermined"

@@ -1,7 +1,7 @@
 name: FocusLock
 
 options:
-  bundleIdPrefix: com.focuslock
+  bundleIdPrefix: com.sddhackathon.focuslock
   deploymentTarget:
     iOS: "26.0"
   xcodeVersion: "26.2"
@@ -28,14 +28,14 @@ targets:
       path: FocusLock/FocusLock.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.focuslock
+          - group.com.sddhackathon.focuslock
         com.apple.developer.family-controls: true
     info:
       path: FocusLock/Info.plist
       properties:
         CFBundleDisplayName: FocusLock
         CFBundleURLTypes:
-          - CFBundleURLName: com.focuslock
+          - CFBundleURLName: com.sddhackathon.focuslock
             CFBundleURLSchemes:
               - focuslock
         NSUserNotificationUsageDescription: "FocusLock uses notifications to warn you when your unlock window is about to close."
@@ -45,7 +45,7 @@ targets:
           - UIInterfaceOrientationPortrait
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock
+        PRODUCT_BUNDLE_IDENTIFIER: com.sddhackathon.focuslock.FocusLock
         INFOPLIST_FILE: FocusLock/Info.plist
         CODE_SIGN_ENTITLEMENTS: FocusLock/FocusLock.entitlements
     dependencies:
@@ -72,7 +72,7 @@ targets:
       path: DeviceActivityMonitor/DeviceActivityMonitor.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.focuslock
+          - group.com.sddhackathon.focuslock
         com.apple.developer.family-controls: true
     info:
       path: DeviceActivityMonitor/Info.plist
@@ -82,7 +82,7 @@ targets:
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).MonitorExtension
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock.DeviceActivityMonitor
+        PRODUCT_BUNDLE_IDENTIFIER: com.sddhackathon.focuslock.FocusLock.DeviceActivityMonitor
         INFOPLIST_FILE: DeviceActivityMonitor/Info.plist
         CODE_SIGN_ENTITLEMENTS: DeviceActivityMonitor/DeviceActivityMonitor.entitlements
     dependencies:
@@ -101,7 +101,7 @@ targets:
       path: ShieldConfiguration/ShieldConfiguration.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.focuslock
+          - group.com.sddhackathon.focuslock
         com.apple.developer.family-controls: true
     info:
       path: ShieldConfiguration/Info.plist
@@ -111,7 +111,7 @@ targets:
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldConfigExtension
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock.ShieldConfiguration
+        PRODUCT_BUNDLE_IDENTIFIER: com.sddhackathon.focuslock.FocusLock.ShieldConfiguration
         INFOPLIST_FILE: ShieldConfiguration/Info.plist
         CODE_SIGN_ENTITLEMENTS: ShieldConfiguration/ShieldConfiguration.entitlements
     dependencies:
@@ -130,7 +130,7 @@ targets:
       path: ShieldAction/ShieldAction.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.focuslock
+          - group.com.sddhackathon.focuslock
         com.apple.developer.family-controls: true
     info:
       path: ShieldAction/Info.plist
@@ -140,7 +140,7 @@ targets:
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldActionExt
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.focuslock.FocusLock.ShieldAction
+        PRODUCT_BUNDLE_IDENTIFIER: com.sddhackathon.focuslock.FocusLock.ShieldAction
         INFOPLIST_FILE: ShieldAction/Info.plist
         CODE_SIGN_ENTITLEMENTS: ShieldAction/ShieldAction.entitlements
     dependencies:

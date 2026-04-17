@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
-    private static let store = UserDefaults(suiteName: "group.focuslock")
+    private static let store = UserDefaults(suiteName: "group.com.sddhackathon.focuslock")
     @Environment(AppRouter.self) private var router
     @Environment(\.modelContext) private var modelContext
 
